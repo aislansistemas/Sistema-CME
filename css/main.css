@@ -1,0 +1,209 @@
+body,html{
+	height: 100%;
+	padding-bottom: 0;
+}
+#tabela-materias{
+	border-radius: 8px;
+}
+.buton-cad{
+	font-weight: 600;
+}
+label{
+	font-weight: 600;
+	font-size: 15px;
+}
+hr{
+	background: #00FF7F;
+}
+.input-sumit{
+	font-weight: bold;
+}
+.div-lateral-img{
+	border-left:1px solid #ccc;
+}
+.tabela-materiais{
+	box-shadow: 0px 1px 10px 1px #ccc;
+}
+.background-geral{
+	background: rgba(0, 216, 169, 1);
+}
+.head-table{
+	background: rgba(0, 216, 169, 1);
+}
+
+/*===*/
+.form-cad-rece{
+	background: #EEE9E9;
+	border-radius: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+#recebe{
+	border-radius: 2px 2px 5px 5px;
+}
+#recebe ul {
+	padding-left: 0px;
+	list-style: none;
+	margin: 0px;
+}
+#recebe ul a {
+	font-weight: bold;
+	display: block;
+	padding-left: 15px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+#recebe ul a:hover {
+	color: #20B2AA;
+	cursor: pointer;
+	background: rgba(180,180,180,0.1);
+}
+
+#div-table-bottom{
+	background: rgba(150,150,150,0.2);
+	border-radius: 0px 0px 8px 8px;
+	position:relative;
+	top:-15px;
+ 
+}
+.cabeçalho-home{
+	border-radius: 3px 3px 0px 0px;
+	background: rgba(0, 216, 169, 1);
+
+}
+#cont-home{
+	background: rgba(150,150,150,0.2);
+	border-radius: 3px;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	align-items: center;
+}
+.item{
+	color: white;
+	width: 220px;
+	border-radius: 3px;
+	height: 150px;
+	margin-bottom: 20px;
+}
+.item1{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}.item2{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}.item3{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}
+.item4{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}
+.item5{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}
+.item6{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}
+.item7{
+	background: rgba(231, 30, 49, 0.8);
+	position: relative;
+}
+.ico{
+	padding-top: 70px;
+	opacity: 0.3;
+	padding-left: 120px;
+}
+.paragrafo{
+	padding-top: 15px;
+	position: absolute;
+}
+.paragrafo p{
+	font-weight: bold;
+}
+.div-visualiza{
+	background: rgba(100,100,100,0.3);
+	margin-top: 19px;
+	padding: 5px;
+	border-radius: 0px 0px 3px 3px;
+	font-weight: bold;
+	text-align: center;
+	transition: background 0.5s,color 0.5s;
+}
+.div-visualiza:hover{
+	background: rgba(200,200,200,0.4);
+	cursor: pointer;
+	color: #E8E8E8;
+}
+.paragrafo a{
+	color: white;
+}
+.paragrafo a:hover{
+	color: #E8E8E8;
+}
+.form-check-input {
+	margin-left: 1rem!important;
+	position: relative!important;
+}
+
+.top-table{
+	height: 10%;
+	padding: 10px 20px 10px 20px;
+	background: rgba(150,150,150,0.2);
+	border-radius: 8px 8px 0px 0px;
+}
+#bottom-table{
+	background: rgba(150,150,150,0.2);
+	border-radius: 0px 0px 8px 8px;
+	height: 40px;
+	position:relative;
+	top:-15px;
+}
+
+#add-button-proce{
+	font-weight: bold;
+}
+#add-button-saida{
+	font-weight: bold;
+}
+nav ul li a{
+	font-weight: 600;
+}
+
+.row-cad-mat{
+	border-radius: 10px;
+}
+#cont a{
+	font-weight: 600;
+}
+#row-cad-hospital .col-md-8{
+	border-radius: 4px;
+}
+#cont-principal input{
+	margin-bottom: 10px;
+}
+
+/*--=--- pagina de contato ----*/
+.contato-left{
+	color: white;
+	background: rgba(0, 216, 169, 1);
+	border-radius: 8px 0px 0px 8px;
+	padding: 50px 30px 20px 50px;
+}
+.contato-right{
+	padding: 30px 30px 20px 50px;
+	border-radius: 0px 8px 8px 0px;
+	border-top: 5px solid rgba(0, 216, 169, 1);
+	border-bottom: 5px solid rgba(0, 216, 169, 1);
+	border-right: 5px solid rgba(0, 216, 169, 1);
+}
+.contato-right button{
+	font-weight: 600;
+}.contato-right input{
+	margin-bottom: 10px;
+}

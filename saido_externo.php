@@ -1,0 +1,259 @@
+<?php
+  session_start();
+  if(!isset($_SESSION) || $_SESSION == null){
+    header('Location: index.php');
+  }
+  require 'Database/Conexao.php';
+  require 'Models/Kit_saido_externo.php';
+  require 'Services/Kit_saido_externo_service.php';
+
+  if(isset($_GET['pagina'])){
+    $pagina=$_GET['pagina'];     
+  }else{
+    $pagina=0;
+  }
+  $limit=20;
+  $conexao = new Conexao();
+  $kit_interno = new Kit_saido_externo();
+  if(isset($_GET['data_1']) && $_GET['data_1'] != null 
+    && isset($_GET['data_2']) && $_GET['data_2'] != null){
+    $data1=$_GET['data_1'];
+    $data2=$_GET['data_2'];
+    ////
+
+    $kit_interno->__set('id_hospital',$_SESSION['id_hospital']);
+    $kit_interno_service = new Kit_saido_externo_service($kit_interno,$conexao);
+    $lista=$kit_interno_service->buscaMaterialSaidaExterno($data1,$data2,$pagina,$limit);
+    $total=$kit_interno_service->totalMateriaisSaidaExternos();
+    $qtdPag = ceil($total['total']/$limit);
+    ////
+  }else{    
+    ///
+    $kit_interno->__set('id_hospital',$_SESSION['id_hospital']);
+    $kit_interno_service = new Kit_saido_externo_service($kit_interno,$conexao);
+    $lista=$kit_interno_service->listaKitSaidaExterno($pagina,$limit);
+    $total=$kit_interno_service->totalMateriaisSaidaExternos();
+    $qtdPag = ceil($total['total']/$limit);
+    ///
+  }
+  date_default_timezone_set('America/Sao_Paulo');
+  $DtSaida=date('d/m/Y');
+  $data_formatada = DateTime::createFromFormat('d/m/Y', $DtSaida);
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>CME</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Estilo customizado css -->
+    <!-- HTML5Shiv -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <header>        
+      <nav class="navbar navbar-expand-md navbar-dark background-geral">
+        <a class="navbar-brand text-light ml-3" href="home.php"><img class="img-responsive" src="img/logo.png" width="150"></a>
+        <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#barranavegacao">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+               
+        <div class="collapse navbar-collapse mr-3" id="barranavegacao">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item pr-1">
+             <a class="nav-link text-light" href="home.php">
+              <i class="fas fa-hospital"></i> Home</a>
+            </li>
+
+            <li class="nav-item pr-1">
+             <div class="dropdown">
+              <a style="cursor: pointer;" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="fas fa-recycle mr-1"></i>Recebimento
+              </a>
+             <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+              <a  class="dropdown-item text-primary" href="material_interno.php">Materiais Internos
+              </a>
+              <a class="dropdown-item text-primary" href="material_externo.php">Materiais Externos</a>
+              </div>
+            </li>
+
+            <li class="nav-item pr-1">
+             <div class="dropdown">
+              <a style="cursor: pointer;" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="fas fa-layer-group"></i></i>
+              Processamento
+              </a>
+             <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+              <a  class="dropdown-item text-primary" href="processado_interno.php">Processados Internos
+              </a>
+              <a class="dropdown-item text-primary" href="processado_externo.php">Processados Externos</a>
+              </div>
+            </li>
+
+            <li class="nav-item pr-1">
+             <div class="dropdown">
+              <a style="cursor: pointer;" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="fas fa-sign-out-alt"></i></i>
+              Saída/materiais
+              </a>
+             <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+              <a  class="dropdown-item text-primary" href="saido_interno.php">Materiais Internos
+              </a>
+              <a class="dropdown-item text-primary" href="saido_externo.php">Materiais Externos</a>
+              </div>
+            </li>
+
+            <li class="nav-item pr-1">
+             <div class="dropdown">
+              <a style="cursor: pointer;" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-syringe mr-1"></i>Materiais
+              </a>
+             <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+            <a  class="dropdown-item text-primary" href="materiaisativos.php">Materiais ativos
+            </a>
+            <a class="dropdown-item text-primary" href="materiaisinativos.php">Materiais inativos</a>
+              </div>
+            </li>
+
+            <li class="nav-item pr-1">
+             <a class="nav-link text-light" href="contato.php">
+              <i class="fas fa-at"></i> Contato</a>
+            </li>
+  
+            <li class="nav-item pr-1">
+              <div class="dropdown">
+              <a style="cursor: pointer;" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> <?= ucfirst($_SESSION['nome']) ?>
+              </a>
+              <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item text-primary" href="Controllers/UsuarioController.php?acao=sair"> <i class="fas fa-arrow-right"></i> Sair
+              </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </div>      
+      </nav>
+      </div>
+    </header>
+
+    <section>
+        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary">Materiais externos liberados do Sistema</h4>
+        <!--= feedback de cadastro feito com sucesso=-->
+      <?php if(isset($_GET['cadastrado'])){ ?>
+            <div class="alert alert-success alert-dismissible">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Material registrado com sucesso!</span>
+            </div>
+        <?php } ?>
+      <!--= ======-->
+        <div class="container mb-5" id="cont"> 
+            <div class="container" style="background: rgba(150,150,150,0.2);border-radius: 8px 8px 0px 0px">
+              <div class="row p-1 pt-2">
+              <div class="col-md-10">
+                <form action="saido_externo.php" method="GET">
+                  <h5 class="text-primary pb-1">Pesquisar por Data</h5>
+                <div class="row">
+                  <div class="col-md-4">
+                  <label for="data_1">Primeira Data:</label>
+                  <input class="form-control mb-2" type="date" name="data_1" id="data_1" value="<?php echo $data_formatada->format('Y-m-d'); ?>">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="data_2">Segunda Data:</label>
+                  <div class="input-group">
+                     <input class="form-control mb-2" type="date" name="data_2" placeholder="Pesquisar..." id="data_2" value="<?php echo $data_formatada->format('Y-m-d'); ?>">
+                   <div class="input-group-prepend">
+                     <button style="border-radius: 0px 5px 5px 0px;" class="btn btn-primary mb-2" type="submit">
+                       <i class="fas fa-search"></i>
+                     </button>
+                   </div>
+                  </div>  
+                  </div>
+                   <div class="col-md-2">
+                     <a href="gera_pdf.php?saido_externo" class="btn btn-danger text-light mb-2" style="margin-top: 30px">RELATÓRIO</a> 
+                   </div>
+                </div>  
+                </form> 
+
+              </div>
+            </div>
+            </div>
+
+           <div class="table-responsive">
+            <table class="table table-light table-striped table-hover text-secondary tabela-materiais table-bordered" id="tabela-materias">
+              <thead class="text-light head-table">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Material</th>
+                  <th scope="col">Quantidade</th>
+                  <th scope="col">Saida para</th>
+                  <th scope="col">NºRegistro</th>
+                  <th scope="col">Paciente</th>
+                  <th scope="col">Reponsável pela saida</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+
+        <?php foreach ($lista as $key => $dados){ ?>
+                <tr class="">
+                    <td><?= $dados['id_mat'] ?></td>
+                    <td><?= $dados['material'] ?></td> 
+                    <td><?= $dados['quantidade'] ?></td>      
+                    <td><?= $dados['saida_para'] ?></td>  
+                    <td><?= $dados['registro'] ?></td>  
+                    <td><?= $dados['paciente_empresa_setor'] ?></td>  
+                    <td><?= $dados['responsavel'] ?></td>  
+                    <td><?= $dados['data_saido'] ?></td>
+                    <td><?= $dados['hora'] ?></td>
+                </tr>
+        <?php } ?> 
+              </tbody>
+            </table>
+            <div class="container p-2 pt-3 pb-2" id="div-table-bottom">
+              <!----- links de paginação ------->
+            <a class="btn btn-secondary btn-sm ml-2" href="saido_externo.php?pagina=0">PRIMEIRA</a>
+            <?php 
+               if($qtdPag > 1 && $pagina<= $qtdPag){ 
+                for($i=1; $i <= $qtdPag; $i++){ 
+              
+                if($i == $pagina){
+                  
+                 echo $i;
+                }else{
+             ?>    
+               <a class="btn btn-secondary btn-sm" href="saido_externo.php?pagina=<?= $i ?>"> <?= $i ?></a>
+              <?php       }
+              }
+ 
+              } ?>
+              <a class="btn btn-secondary btn-sm" href="saido_externo.php?pagina=<?= $qtdPag ?>">ÚLTIMA</a> 
+              <!------- fim do bloco de paginação -------->
+             </div>
+           </div>
+
+        </div>
+    </section>
+
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

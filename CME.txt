@@ -1,0 +1,125 @@
+create database sistema_cme;
+
+create table tb_hospitais(
+	id int not null auto_increment primary key,
+	logo varchar(255),
+	logo_caminho varchar(250),
+	nome varchar(50) not null,
+	email varchar(40) not null,
+	senha varchar(30) not null,
+	cnpj varchar(50) not null,
+	telefone varchar(30) not null,
+	endereco varchar(50) not null,
+	cidade varchar(50) not null,
+	estado varchar(30) not null,
+	situacao varchar(12) default 'ativo'
+);
+
+create table tb_usuarios(
+	id int not null auto_increment primary key,
+	id_hospital int not null,
+	nome varchar(50) not null,
+	email varchar(40) not null,
+	perfil varchar(30) default 'comum',
+	situacao varchar(12) default 'ativo',
+	senha varchar(30) not null
+);
+
+create table tb_materiais(
+	id int not null auto_increment primary key,
+	id_hospital int not null,
+	descricao varchar(100) not null,
+	situacao varchar(12) default 'ativo',
+	status_material varchar(20) default 'disponivel'
+);
+
+create table tb_materiais_recebidos (
+	id int not null auto_increment primary key,
+	id_hospital int not null,
+	quem_entregou varchar(50) not null,
+	quem_recebeu varchar(50) not null,
+	quem_lavou varchar(50) not null,
+	data date not null,
+	hora time not null
+);
+
+create table tb_kit_material_recebido_interno (
+	id int not null auto_increment primary key,
+	id_recebido int not null,
+	id_hospital int not null,
+	id_material int not null,
+	quantidade varchar(3),
+	status varchar(20) default 'recebido'
+);
+
+create table tb_kit_material_recebido_externo (
+	id int not null auto_increment primary key,
+	id_recebido int not null,
+	id_hospital int not null,
+	material varchar(100) not null,
+	quantidade varchar(3) not null,	
+	status varchar(20) default 'recebido'
+);
+
+create table tb_materiais_processados(
+	id int not null auto_increment primary key,
+	id_hospital int not null,
+	responsavel_por varchar(50) not null,
+	lote varchar(10) not null,	
+	inicio_ciclo time not null,
+	fim_ciclo time not null,
+	numero_do_ciclo varchar(10) not null,
+	pressao varchar(10) not null,
+	temperatura_interna varchar(10) not null,
+	horario_134 time not null,
+	data date not null,
+	hora time not null
+);
+
+create table tb_kit_material_processado_interno (
+	id int not null auto_increment primary key,
+	id_processado int not null,
+	id_hospital int not null,
+	id_material int not null,	
+	quantidade varchar(3),
+	status varchar(20) default 'processado'
+);
+CREATE TABLE `tb_kit_material_processado_externo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_processado` int(11) NOT NULL,
+  `id_hospital` int(11) NOT NULL,
+  `material` varchar(100) NOT NULL,
+  `quantidade` varchar(3) NOT NULL,
+  `status` varchar(20) DEFAULT 'processado',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+
+create table tb_saida_material (
+	id int not null auto_increment primary key,
+	id_hospital int not null,
+	data date not null,
+	hora time not null,
+	saida_para varchar(50) not null,	
+	registro varchar(3) not null,
+	paciente_empresa_setor varchar(70) not null,
+	responsavel varchar(50) not null
+);
+
+CREATE TABLE `tb_kit_material_saido_externo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_saida` int(11) NOT NULL,
+  `id_hospital` int(11) NOT NULL,
+  `material` varchar(100) NOT NULL,
+  `quantidade` varchar(3) NOT NULL,
+  `status` varchar(20) DEFAULT 'saido',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+create table tb_kit_material_saido_interno (
+	id int not null auto_increment primary key,
+	id_saida int not null,
+	id_hospital int not null,
+	id_material int not null,
+	quantidade varchar(3),
+	status varchar(20) default 'saido'
+);

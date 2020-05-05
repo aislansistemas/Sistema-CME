@@ -1,0 +1,35 @@
+body,html{
+	padding-bottom: 0;
+	height: 100%;
+}
+nav ul li a{
+	font-weight: 600;
+}
+.background-geral{
+	background: rgba(0, 216, 169, 1);
+}
+#row-cad-hospital button{
+	font-weight: 600;
+}
+#row-cad-hospital .col-md-10{
+	border-radius: 3px;
+}
+#cont-principal{
+	background: rgba(0, 216, 169, 1);
+	height: 100%;
+	padding-bottom: 50px
+}
+#cont-principal input{
+	margin-bottom: 10px;
+}
+label{
+	font-weight: 600;
+}
+#tabela-materias{
+	border-radius: 8px;
+	box-shadow: 0px 1px 10px 1px #ccc;
+}
+.head-table{
+	border-radius: 8px;
+	background: rgba(0, 216, 169, 1);
+}
