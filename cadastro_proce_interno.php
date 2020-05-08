@@ -192,7 +192,7 @@
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
                                     <td class="material-qt"><input class="form-control qtd-material" id="qtd-material-<?php echo $material['id']; ?>" onKeyup="changeQtdMeterial(<?php echo $material['id']; ?>,<?php echo $key; ?>)" style="width: 200px" type="text" required="" value="<?php echo $material['qtd']; ?>" placeholder="Informe quantidade"></td>
                                     <td>
-                                        <a class="btn btn-danger text-light" onclick="limparProcessados(<?= $key ?>, <?= $material['id'] ?>,'<?= $material['nome'] ?>',<?= $material['qtd'] ?>)"><i class="far fa-times-circle"></i></a>
+                                        <a class="btn btn-danger text-light" onclick="limpar(<?= $key ?>, <?= $material['id'] ?>)"><i class="far fa-times-circle"></i></a>
                                     </td>
                                 </tr>
 

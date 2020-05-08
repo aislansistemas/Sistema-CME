@@ -9,6 +9,9 @@
 	require_once "../Services/Kit_material_interno_service.php";
 	require_once "../Services/Kit_material_externo_service.php";
 
+	require_once "../Models/Material.php";
+	require_once "../Services/MaterialService.php";
+
 	if(isset($_GET['acao']) && $_GET['acao'] == 'cadastrar_interno'){
 	    // Receber os dados:
 	    //print_r($_SESSION);
@@ -34,6 +37,13 @@
 			$kit_interno->__set('quantidade',$dados['qtd']);
 			$kit_interno_service = new Kit_mat_inter_service($kit_interno,$conexao);
 			$kit_interno_service->salvaKitInterno();
+
+			$material = new Material();
+			$material->__set('id',$dados['id']);
+			$material->__set('status_material','indisponivel');
+			$material->__set('id_hospital',$_SESSION['id_hospital']);
+			$material_service = new MaterialService($material,$conexao);
+			$material_service->editarStatus();
 		}
 		unset($_SESSION['materiais_enviados']);
 		header('Location: ../material_interno.php?cadastrado');

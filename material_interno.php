@@ -217,7 +217,7 @@
                 </tr>
               </thead>
               <tbody>
-          <?php foreach ($lista as $key => $dados){ ?>
+          <?php foreach ($lista as $key => $dados){  ?>
                 <tr> 
        <?php if($dados['status'] == 'recebido'){  ?>
                   <td><input class="form-control" type="checkbox" value="<?= $dados['id_material'] ?>, <?= $dados['id_kit'] ?>" class="form-check-input" name="check-material-id"></td>

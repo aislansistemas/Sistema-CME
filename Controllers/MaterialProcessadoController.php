@@ -27,11 +27,6 @@
 			$kit_recebido_service = new Kit_mat_inter_service($kit_recebido,$conexao);
 			$getMaterialRecbido=$kit_recebido_service->getMaterialInterno();
 
-			if($dados['qtd'] > $getMaterialRecbido[0]['quantidade']){
-				$_SESSION['erroProcessadosQtd'] = "O item ". $getMaterialRecbido[0]['descricao'] ." ultrapassou quantidade permitida.";
-				header('Location: ../cadastro_proce_interno.php');
-				exit;
-			}
 			if($dados['qtd'] == 0){
 				$_SESSION['erroProcessadosQtd'] = "O item ". $getMaterialRecbido[0]['descricao'] ." está zerado.";
 				header('Location: ../cadastro_proce_interno.php');
@@ -69,13 +64,11 @@
 			$getMaterialRecbido=$kit_recebido_get_service->getMaterialInterno();
 
 			if($getMaterialRecbido[0]['id_kit'] == $dados['id_recebido_material']){
-				$novoQtd = $getMaterialRecbido[0]['quantidade'] - $dados['qtd'];
 
 				$kit_recebido_alterar = new Kit_Material_interno();
 				$kit_recebido_alterar->__set('id_hospital',$_SESSION['id_hospital']);
 				$kit_recebido_alterar->__set('id',$dados['id_recebido_material']);
-				$kit_recebido_alterar->__set('quantidade',$novoQtd);
-				$kit_recebido_alterar->__set('status',($novoQtd == 0 ? 'finalizado' : 'recebido'));
+				$kit_recebido_alterar->__set('status','finalizado');
 				$kit_recebido_alterar_service = new Kit_mat_inter_service($kit_recebido_alterar,$conexao);
 				$kit_recebido_alterar_service->alterarQtdKitInterno();
 			}

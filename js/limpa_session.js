@@ -56,11 +56,10 @@ function limparSaidaExterno(key,id){
 	//console.log(ajax);
 }
 
-function limparExterno(key,nome){
-	var nome=nome.toString();
+function limparExterno(key){
 	let ajax=new XMLHttpRequest();
 
-	ajax.open('GET', 'teste.php?acao_externo&key='+key+'&nome='+nome);
+	ajax.open('GET', 'teste.php?acao_externo&key='+key);
 
 	ajax.onreadystatechange=()=>{
 	if(ajax.readyState==4 && ajax.status==200){
@@ -79,7 +78,6 @@ function limparProcessados(key,nome){
 	let ajax=new XMLHttpRequest();
 					//console.log(ajax.readyState);
 	ajax.open('GET', 'teste.php?acao_externo&key='+key+'&materialnome='+nome);
-	console.log(ajax.readyState);
 
 	ajax.onreadystatechange=()=>{
 	if(ajax.readyState==4 && ajax.status==200){

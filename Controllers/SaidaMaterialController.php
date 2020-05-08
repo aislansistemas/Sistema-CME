@@ -13,6 +13,9 @@
 	require_once "../Services/kit_processado_interno_service.php";
 	require_once "../Services/Kit_processado_externo_service.php";
 
+	require_once "../Models/Material.php";
+	require_once "../Services/MaterialService.php";
+
 	session_start();
 
 	$conexao = new Conexao();
@@ -20,6 +23,8 @@
 	if(isset($_GET['saido_interno'])){
 
 		$_SESSION['registroSaidaValores'] = $_POST;
+
+
 		
 		foreach ($_SESSION['materiais_saida_enviados'] as $key => $dados) {
 			$kit_proce = new Kit_Processado_Interno();
@@ -27,8 +32,6 @@
 			$kit_proce->__set('id_hospital',$_SESSION['id_hospital']);
 			$kit_proce_service = new Kit_proce_interno_service($kit_proce,$conexao);
 			$getMaterialProcesado=$kit_proce_service->getKitProcessandoInterno();
-
-	
 
 			if($dados['qtd'] > $getMaterialProcesado[0]['quantidade']){
 				$_SESSION['erroSaidaQtd'] = "O item ". $getMaterialRecbido[0]['descricao'] ." ultrapassou quantidade permitida.";
@@ -68,7 +71,6 @@
 
 			if($getMaterialProcesado[0]['id_processando_material'] == $dados['id_processado_material']){
 				$novoQtd = $getMaterialProcesado[0]['quantidade'] - $dados['qtd'];
-
 				
 				$kit_proce = new Kit_Processado_Interno();
 				$kit_proce->__set('id_processado_material',$dados['id_processado_material']);
@@ -78,8 +80,19 @@
 				$kit_proce_service = new Kit_proce_interno_service($kit_proce,$conexao);
 				$kit_proce_service->alterarKitProcessadoStatus();
 			}
+
+			if($novoQtd == 0){
+				$material = new Material();
+				$material->__set('id',$dados['id']);
+				$material->__set('status_material','disponivel');
+				$material->__set('id_hospital',$_SESSION['id_hospital']);
+				$material_service = new MaterialService($material,$conexao);
+				$material_service->editarStatus();
+			}
 		}
+
 		unset($_SESSION['registroSaidaValores']);
+		unset($_SESSION['erroSaidaQtd']);
 		unset($_SESSION['materiais_saida_enviados']);
 		header('Location: ../saido_interno.php?cadastrado');
 	}else if(isset($_GET['saido_externo'])){

@@ -181,7 +181,7 @@
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
                                     <td class="material-qt"><?php echo $material['qtd']; ?></td>
                                     <td>
-                                       <a class="btn btn-danger text-light" onclick="limparExterno(<?= $key ?>,'<?= $material['nome'] ?>')"><i class="far fa-times-circle"></i></a>
+                                       <a class="btn btn-danger text-light" onclick="limparExterno(<?= $key ?>)"><i class="far fa-times-circle"></i></a>
                                     </td>
                                     </td>
                                 </tr>
@@ -247,7 +247,7 @@
                         linha += '<tr data-id="' + dataMaterial.nome + '">';
                         linha += '<td class="material-nome">' + dataMaterial.nome + '</td>';
                         linha += '<td class="material-qt">' + dataMaterial.qtd + '</td>';
-                        linha += '<td><a class="btn btn-danger text-light" onclick="limpar('+index+','+dataMaterial.nome+')"><i class="far fa-times-circle"></i></a></td>';
+                        linha += '<td><a class="btn btn-danger text-light" onclick="limparExterno('+index+')"><i class="far fa-times-circle"></i></a></td>';
                         linha += '</tr>';
 
                     });

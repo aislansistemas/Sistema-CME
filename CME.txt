@@ -92,7 +92,7 @@ CREATE TABLE `tb_kit_material_processado_externo` (
   `quantidade` varchar(3) NOT NULL,
   `status` varchar(20) DEFAULT 'processado',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 create table tb_saida_material (
 	id int not null auto_increment primary key,
@@ -113,7 +113,7 @@ CREATE TABLE `tb_kit_material_saido_externo` (
   `quantidade` varchar(3) NOT NULL,
   `status` varchar(20) DEFAULT 'saido',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 create table tb_kit_material_saido_interno (
 	id int not null auto_increment primary key,

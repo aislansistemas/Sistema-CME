@@ -47,7 +47,7 @@
 
 		public function buscaMateriasAtivos(){
 			$query="select * from tb_materiais 
-			where id_hospital = :id_hospital and situacao = 'ativo' and descricao like :descricao ";
+			where id_hospital = :id_hospital and situacao = 'ativo' and descricao like :descricao  and status_material = 'disponivel'";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$_SESSION['id_hospital']);
 			$stmt->bindValue(':descricao','%'.$this->material->__get('descricao').'%');
@@ -81,6 +81,16 @@
 			$insert->bindValue(':id_hospital',$this->material->__get('id_hospital'));
 			$insert->execute();
 		}
+
+		public function editarStatus(){
+			$query="update tb_materiais set status_material = :status_material where id = :id and id_hospital = :id_hospital";
+			$insert=$this->conexao->prepare($query);
+			$insert->bindValue(':id',$this->material->__get('id'));
+			$insert->bindValue(':id_hospital',$this->material->__get('id_hospital'));
+			$insert->bindValue(':status_material',$this->material->__get('status_material'));
+			$insert->execute();
+		}
+
 		public function desativar(){
 			$query="update tb_materiais set situacao = 'inativo' where id = :id and id_hospital = :id_hospital";
 			$insert=$this->conexao->prepare($query);
