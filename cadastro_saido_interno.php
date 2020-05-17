@@ -11,9 +11,11 @@ if (!isset($_SESSION) || $_SESSION == null) {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>CME</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -136,16 +138,20 @@ if (!isset($_SESSION) || $_SESSION == null) {
                 <div class="row mb-4">
                     <div class="col-md-3">                
                         <label class="text-dark">Saída para:</label>
-                        <input class="form-control mb-1" type="text" value="<?=$_SESSION['registroSaidaValores']['saida_para'] ?>" name="saida_para" required=""
-                               placeholder="Paciente/Empresa/Setor">
+                        <select class="form-control mb-1" name="saida_para" required="">
+                          <option>Selecione:</option>
+                          <option value="Paciente">Paciente</option>
+                          <option value="Empresa">Empresa</option>
+                          <option value="Setor">Setor</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label class="text-dark">NºRegistro</label>
-                        <input class="form-control" type="number" name="registro" value="<?=$_SESSION['registroSaidaValores']['registro'] ?>" placeholder="NºRegistro" required="">
+                        <input class="form-control" type="number" name="registro" value="<?php if(isset($_SESSION['registroSaidaValores']['registro'])){ ?><?=$_SESSION['registroSaidaValores']['registro'] ?><?php } ?>" placeholder="NºRegistro" required="">
                     </div>
                     <div class="col-md-3">
                         <label class="text-dark">Paciente/Empresa/Setor</label>
-                        <input class="form-control" type="text" name="paciente_empresa_setor" value="<?=$_SESSION['registroSaidaValores']['paciente_empresa_setor'] ?>" placeholder="Nome" required="">
+                        <input class="form-control" type="text" name="paciente_empresa_setor" value="<?php if(isset($_SESSION['registroSaidaValores']['paciente_empresa_setor'])){ ?><?=$_SESSION['registroSaidaValores']['paciente_empresa_setor'] ?><?php } ?>" placeholder="Nome" required="">
                     </div>
                     <div class="col-md-3">
                         <label class="text-dark">Responsavel pela Saída</label>
@@ -169,8 +175,9 @@ if (!isset($_SESSION) || $_SESSION == null) {
                             <thead class="text-dark">
                          
                             <tr>
+                                <th scope="col">Id</th>
                                 <th scope="col">Item</th>
-                                <th scope="col">Quantidade</th>
+                                <th scope="col"></th>
                                 <th scope="col">Ações</th>
                             </tr>
                             </thead>
@@ -181,8 +188,9 @@ if (!isset($_SESSION) || $_SESSION == null) {
                             <?php foreach($_SESSION['materiais_saida_enviados'] as $key => $material){ ?>
 
                                 <tr data-id="<?php echo $material['id']; ?>">
+                                    <td class="material-nome"><?php echo $material['id']; ?></td>
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
-                                    <td class="material-qt"><input class="form-control qtd-material" id="qtd-material-<?php echo $material['id']; ?>" onKeyup="changeQtdMeterial(<?php echo $material['id']; ?>,<?php echo $key; ?>)" style="width: 200px" type="text" required="" value="<?php echo $material['qtd']; ?>" placeholder="Informe quantidade"></td>
+                                    <td class="material-qt"><input class="form-control" style="width: 200px" type="hidden" value="1"></td>
                                     
                                     <td>
                                
@@ -221,7 +229,7 @@ if (!isset($_SESSION) || $_SESSION == null) {
 
         <script>
 function changeQtdMeterial(mterialId, posicao){
-
+/*
   var qtdMeterial = document.getElementById("qtd-material-"+mterialId).value;
 
    // Chamada em ajax pra enviar os dados e salvar na sessão:
@@ -240,7 +248,7 @@ function changeQtdMeterial(mterialId, posicao){
     }
   });
 
-}
+}*/
 </script>
 </body>
 </html>

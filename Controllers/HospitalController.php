@@ -24,7 +24,6 @@
 			if(move_uploaded_file($file_temp, $path)){
 
 				$hospital = new Hospital();
-				$hospital = new Hospital();
 				$hospital->__set('logo',$file_name);
 				$hospital->__set('logo_caminho',$path);
 				$hospital->__set('nome',$_POST['nome']);
@@ -36,19 +35,26 @@
 				$hospital->__set('cidade',$_POST['cidade']);
 				$hospital->__set('estado',$_POST['estado']);
 				$hospital_service = new HospitalService($hospital,$conexao);
-				$hospital_service->CadastraHospital();
-				$lastId=$hospital_service->GetLastID();
+				$emailHospital = $hospital_service->BuscaHospitalPorEmail();
+				if($emailHospital['email'] == null || $emailHospital['email'] == ''){
 
-				$usuario = new Usuario();
-				$usuario->__set('id_hospital',$lastId['id']);
-				$usuario->__set('nome',$_POST['nome']);
-				$usuario->__set('email',$_POST['email']);
-				$usuario->__set('senha',$_POST['senha']);
-				$usuario->__set('perfil',"admin");
-				$usuario_service = new UsuarioService($usuario,$conexao);
-				$usuario_service->CadastrarUsuarioAdmin();
-				echo $lastId['id'];
-				header('location: ../admin.php?criado');
+					$hospital_service->CadastraHospital();
+					$lastId=$hospital_service->GetLastID();
+
+					$usuario = new Usuario();
+					$usuario->__set('id_hospital',$lastId['id']);
+					$usuario->__set('nome',$_POST['nome']);
+					$usuario->__set('email',$_POST['email']);
+					$usuario->__set('senha',$_POST['senha']);
+					$usuario->__set('perfil',"admin");
+					$usuario_service = new UsuarioService($usuario,$conexao);
+					$usuario_service->CadastrarUsuarioAdmin();
+					echo $lastId['id'];
+					header('location: ../admin.php?criado');
+				}else{
+					header('location: ../cad_hospital.php?existente');
+				}
+
 			}
 			}
 		}
@@ -81,6 +87,73 @@
 		$usuario_service->ativaMuitos();
 		////
 		header('Location: ../admin.php?ativado&&hospital='.$hospitalID['nome']);
+	}else if(isset($_GET['acao']) && $_GET['acao'] == 'editar'){
+		/////////////////////////////
+		$hospital = new Hospital();
+		$usuario = new Usuario();
+
+		if(!empty($_FILES['logo']['name'])){
+		///se existir imagem/////
+			$file_name = $_FILES['logo']['name'];
+			$file_temp = $_FILES['logo']['tmp_name'];
+			$allowed_ext = array("jpg", "jpeg", "gif", "png");
+			$exp = explode(".", $file_name);
+			$ext = end($exp);
+			$path = "../upload/".$file_name;
+
+		if(in_array($ext, $allowed_ext)){
+			if(move_uploaded_file($file_temp, $path)){
+
+				$hospital = new Hospital();
+				$hospital->__set('logo',$file_name);
+				$hospital->__set('logo_caminho',$path);
+				$hospital->__set('id',$_POST['id']);
+				$hospital->__set('nome',$_POST['nome']);
+				$hospital->__set('email',$_POST['email']);
+				$hospital->__set('senha',$_POST['senha']);
+				$hospital->__set('cnpj',$_POST['cnpj']);
+				$hospital->__set('telefone',$_POST['telefone']);
+				$hospital->__set('endereco',$_POST['endereco']);
+				$hospital->__set('cidade',$_POST['cidade']);
+				$hospital->__set('estado',$_POST['estado']);
+				$hospital_service = new HospitalService($hospital,$conexao);
+				$hospital_service->EditarComImagem();
+
+				$usuario->__set('id_hospital',$_POST['id']);
+				$usuario->__set('nome',$_POST['nome']);
+				$usuario->__set('email',$_POST['email']);
+				$usuario->__set('senha',$_POST['senha']);
+				$usuario_service = new UsuarioService($usuario,$conexao);
+				$usuario_service->EditaUsuario();
+				header('Location: ../admin.php?editado');
+			}
+		}	
+
+		}else{
+		////se não existir imagem/////	
+			
+			$hospital->__set('id',$_POST['id']);
+			$hospital->__set('nome',$_POST['nome']);
+			$hospital->__set('email',$_POST['email']);
+			$hospital->__set('senha',$_POST['senha']);
+			$hospital->__set('cnpj',$_POST['cnpj']);
+			$hospital->__set('telefone',$_POST['telefone']);
+			$hospital->__set('endereco',$_POST['endereco']);
+			$hospital->__set('cidade',$_POST['cidade']);
+			$hospital->__set('estado',$_POST['estado']);
+			$hospital_service = new HospitalService($hospital,$conexao);
+			$hospital_service->EditarSemImagem();
+			
+			$usuario->__set('id_hospital',$_POST['id']);
+			$usuario->__set('nome',$_POST['nome']);
+			$usuario->__set('email',$_POST['email']);
+			$usuario->__set('senha',$_POST['senha']);
+			$usuario_service = new UsuarioService($usuario,$conexao);
+			$usuario_service->EditaUsuario();
+			header('Location: ../admin.php?editado');
+		}
+			
+		////////////////////////////
 	}
 	
 ?>

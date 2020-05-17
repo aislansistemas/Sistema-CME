@@ -94,7 +94,26 @@
 		$usuario->__set('senha',$_POST['senha']);
 		$usuario->__set('perfil',$_POST['perfil']);
 		$usuario_service = new UsuarioService($usuario,$conexao);
-		$usuario_service->CadastrarUsuarioAdmin();
-		header('Location: ../usuarios.php?cadastrado');
+		$dados=$usuario_service->buscarEmailUsuario();
+
+		if($dados['email'] != $_POST['email']){						
+			$usuario_service->CadastrarUsuarioAdmin();
+			header('Location: ../usuarios.php?cadastrado');
+		}else{
+			header('Location: ../cad_usuario.php?existente');
+		}
+		
+	}else if(isset($_GET['acao']) && $_GET['acao'] == 'editarPerfil'){
+		echo $_SESSION['id_hospital'];
+		print_r($_POST);
+		$conexao = new Conexao();
+		$usuario = new Usuario();
+		$usuario->__set('id_hospital',$_SESSION['id_hospital']);
+		$usuario->__set('perfil',$_POST['perfil']);
+		$usuario->__set('id',$_POST['id']);
+		$usuario_service = new UsuarioService($usuario,$conexao);
+		$dados=$usuario_service->EditaPerfilUsuario();
+		header('Location: ../usuarios.php?editado&nome='.$_POST['nome']);
 	}
+
 ?>

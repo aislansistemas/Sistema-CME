@@ -31,14 +31,14 @@
 			$stmt->execute();
 		}
 		public function listaKitProcessandoInterno($pagina,$limit){
-			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y %h:%m') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and a.status = 'processado' and a.quantidade > 0 order by a.id desc limit ".$pagina.",".$limit."";
+			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and a.status = 'processado' order by a.id desc limit ".$pagina.",".$limit."";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
 			$stmt->execute();
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		public function getKitProcessandoInterno(){
-			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y %h:%m') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and a.id = :id_processado_material and a.status = 'processado' and a.quantidade > 0 order by a.id desc";
+			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and a.id = :id_processado_material and a.status = 'processado' order by a.id desc";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_processado_material',$this->kit_proce_interno->__get('id_processado_material'));
 			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
@@ -47,7 +47,7 @@
 		}
 		///metodo de buscar material pela descricao
 		public function buscaMaterialProcessandoInterno($material,$tipobusca,$pagina,$limit){
-			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y %h:%m') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and ".$tipobusca." like :material and a.status = 'processado' and a.quantidade > 0 ORDER by data_processado desc limit ".$pagina.",".$limit."";
+			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and ".$tipobusca." like :material and a.status = 'processado' ORDER by data_processado desc limit ".$pagina.",".$limit."";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':material','%'.$material.'%');
 			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
@@ -56,7 +56,7 @@
 		}
 		///
 		public function totalMateriaisProcessandoInternos(){
-			$query="select count(*) as total from tb_kit_material_processado_interno where id_hospital= :id_hospital and status = 'processado' and quantidade > 0";
+			$query="select count(*) as total from tb_kit_material_processado_interno where id_hospital= :id_hospital and status = 'processado' ";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
 			$stmt->execute();
@@ -64,7 +64,7 @@
 		}
 		public function TotalProceInterno(){
 			$query="select count(*) total_proce_interno 
-			from tb_kit_material_processado_interno where id_hospital = :id_hospital and status = 'processado' and quantidade > 0";
+			from tb_kit_material_processado_interno where id_hospital = :id_hospital and status = 'processado' ";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
 			$stmt->execute();

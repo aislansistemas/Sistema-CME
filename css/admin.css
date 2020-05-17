@@ -14,12 +14,10 @@ nav ul li a{
 #row-cad-hospital .col-md-10{
 	border-radius: 3px;
 }
-#cont-principal{
-	background: rgba(0, 216, 169, 1);
-	height: 100%;
-	padding-bottom: 50px
-}
 #cont-principal input{
+	margin-bottom: 10px;
+}
+#row-cad-hospital input{
 	margin-bottom: 10px;
 }
 label{

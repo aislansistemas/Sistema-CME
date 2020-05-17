@@ -193,7 +193,7 @@ $mpdf->Output();
     <tbody>";
         
     foreach($lista as $key => $dado){ 
-        $html.="<tr><td>".$dado['id_kit']."</td>";
+        $html.="<tr><td>".$dado['id_material']."</td>";
         $html.="<td>".$dado['descricao']."</td>";
         $html.="<td>".$dado['quem_entregou']."</td>";
         $html.="<td>".$dado['quem_recebeu']."</td>";
@@ -370,7 +370,7 @@ $mpdf->Output();
     <tbody>";
         
     foreach($lista as $key => $dado){ 
-        $html.="<tr><td>".$dado['id_mat']."</td>";
+        $html.="<tr><td>".$dado['id_material']."</td>";
         $html.="<td>".$dado['descricao']."</td>";
         $html.="<td>".$dado['saida_para']."</td>";
         $html.="<td>".$dado['registro']."</td>";
@@ -554,7 +554,7 @@ $mpdf->Output();
     <tbody>";
         
     foreach($lista as $key => $dado){ 
-        $html.="<tr><td>".$dado['id_processando_material']."</td>";
+        $html.="<tr><td>".$dado['id_material']."</td>";
         $html.="<td>".$dado['descricao']."</td>";
         $html.="<td>".$dado['responsavel_por']."</td>";
         $html.="<td>".$dado['lote']."</td>";

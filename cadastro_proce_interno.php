@@ -17,9 +17,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -141,7 +143,7 @@
               
               <div class="col-md-4">
                 <label >Lote</label>
-                <input class="form-control" type="text" name="lote" value="<?php if(isset($_SESSION['registroProcessadosValores']['lote'])){ ?> <?= $_SESSION['registroProcessadosValores']['lote'] ?><?php } ?>"  required="" placeholder="Nº Seq.Automático">
+                <input class="form-control" type="number" name="lote" value="<?php if(isset($_SESSION['registroProcessadosValores']['lote'])){ ?> <?= $_SESSION['registroProcessadosValores']['lote'] ?><?php } ?>"  required="" placeholder="Nº">
               </div>
               <div class="col-md-4">
                 <label>Início do ciclo</label>
@@ -155,16 +157,16 @@
             <div class="row mb-4">
               <div class="col-md-3">
                 <label>NºCiclo</label>
-                <input class="form-control" type="number" name="numero_do_ciclo" value="<?= $_SESSION['registroProcessadosValores']['numero_do_ciclo'] ?>" required="" placeholder="55">
+                <input class="form-control" type="number" name="numero_do_ciclo" value="<?= $_SESSION['registroProcessadosValores']['numero_do_ciclo'] ?>" required="">
               </div>
               <div class="col-md-2">
                 <label>Pressão</label>
-                <input class="form-control" type="text" name="pressao" value="<?php if(isset($_SESSION['registroProcessadosValores']['pressao'])){ ?> <?= $_SESSION['registroProcessadosValores']['pressao'] ?> <?php } ?>" required="" placeholder="2,5">
+                <input class="form-control" type="text" name="pressao" value="<?php if(isset($_SESSION['registroProcessadosValores']['pressao'])){ ?> <?= $_SESSION['registroProcessadosValores']['pressao'] ?> <?php } ?>" required="">
               </div>
 
               <div class="col-md-3">
-                <label>Temp.Interna</label>
-                <input class="form-control" type="text" name="temperatura_interna" value="<?php if(isset($_SESSION['registroProcessadosValores']['temperatura_interna'])){ ?> <?= $_SESSION['registroProcessadosValores']['temperatura_interna'] ?> <?php } ?>" required="" placeholder="134">
+                <label>Temp.Interna (134º)</label>
+                <input class="form-control" type="text" name="temperatura_interna" value="<?php if(isset($_SESSION['registroProcessadosValores']['temperatura_interna'])){ ?> <?= $_SESSION['registroProcessadosValores']['temperatura_interna'] ?> <?php } ?>" required="">
               </div>
               <div class="col-md-4">
                 <label>Horário que atingiu os 134º</label>
@@ -177,8 +179,9 @@
                         <table class="table table-light" id="tabela-materias">
                             <thead class="text-dark">
                             <tr>
+                                <th scope="col">Id</th>
                                 <th scope="col">Item</th>
-                                <th scope="col">Quantidade</th>
+                                <th scope="col"></th>
                                 <th scope="col">Ações</th>
                             </tr>
                             </thead>
@@ -189,8 +192,9 @@
                             <?php foreach($_SESSION['materiais_enviados'] as $key =>$material){ ?>
 
                                 <tr data-id="<?php echo $material['id']; ?>">
+                                    <td><?= $material['id'] ?></td>
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
-                                    <td class="material-qt"><input class="form-control qtd-material" id="qtd-material-<?php echo $material['id']; ?>" onKeyup="changeQtdMeterial(<?php echo $material['id']; ?>,<?php echo $key; ?>)" style="width: 200px" type="text" required="" value="<?php echo $material['qtd']; ?>" placeholder="Informe quantidade"></td>
+                                    <td><input class="form-control" style="width: 200px" type="hidden" value="1"></td>
                                     <td>
                                         <a class="btn btn-danger text-light" onclick="limpar(<?= $key ?>, <?= $material['id'] ?>)"><i class="far fa-times-circle"></i></a>
                                     </td>
@@ -221,7 +225,7 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-<script>
+<script>/*
 function changeQtdMeterial(mterialId, posicao){
 
   var qtdMeterial = document.getElementById("qtd-material-"+mterialId).value;
@@ -242,7 +246,7 @@ function changeQtdMeterial(mterialId, posicao){
     }
   });
 
-}
+}*/
 </script>
 </body>
 </html>

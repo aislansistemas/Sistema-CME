@@ -27,11 +27,11 @@
 			$kit_recebido_service = new Kit_mat_inter_service($kit_recebido,$conexao);
 			$getMaterialRecbido=$kit_recebido_service->getMaterialInterno();
 
-			if($dados['qtd'] == 0){
+			/*if($dados['qtd'] == 0){
 				$_SESSION['erroProcessadosQtd'] = "O item ". $getMaterialRecbido[0]['descricao'] ." está zerado.";
 				header('Location: ../cadastro_proce_interno.php');
 				exit;
-			}
+			}*/
 		}
 
 		$mat_proce = new MaterialProcessado();

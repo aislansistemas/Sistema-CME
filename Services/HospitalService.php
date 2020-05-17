@@ -33,7 +33,7 @@
 		}
 
 		public function BuscaHospitais(){
-			$query="select * from tb_hospitais";
+			$query="select * from tb_hospitais where situacao = 'ativo'";
 			$dados=$this->conexao->prepare($query);
 			$dados->execute();
 			return $dados->fetchAll(PDO::FETCH_ASSOC);
@@ -59,6 +59,46 @@
 			$dados=$this->conexao->prepare($query);
 			$dados->bindValue(':id',$this->hospital->__get('id'));
 			$dados->execute();	
+		}
+
+		public function BuscaHospitalPorEmail(){
+			$query="select * from tb_hospitais where email = :email";
+			$dados=$this->conexao->prepare($query);
+			$dados->bindValue(':email',$this->hospital->__get('email'));
+			$dados->execute();
+			return $dados->fetch();
+		}
+
+		public function EditarSemImagem(){
+			$query="update tb_hospitais set nome = :nome, email = :email, senha = :senha, cnpj = :cnpj, telefone = :telefone, endereco = :endereco ,cidade = :cidade, estado = :estado where id = :id ";
+			$dados=$this->conexao->prepare($query);
+			$dados->bindValue(':nome',$this->hospital->__get('nome'));
+			$dados->bindValue(':email',$this->hospital->__get('email'));
+			$dados->bindValue(':senha',$this->hospital->__get('senha'));
+			$dados->bindValue(':cnpj',$this->hospital->__get('cnpj'));
+			$dados->bindValue(':telefone',$this->hospital->__get('telefone'));
+			$dados->bindValue(':endereco',$this->hospital->__get('endereco'));
+			$dados->bindValue(':cidade',$this->hospital->__get('cidade'));
+			$dados->bindValue(':estado',$this->hospital->__get('estado'));
+			$dados->bindValue(':id',$this->hospital->__get('id'));
+			$dados->execute();
+		}
+
+		public function EditarComImagem(){
+			$query="update tb_hospitais set logo = :logo, logo_caminho = :logo_caminho, nome = :nome, email = :email, senha = :senha, cnpj = :cnpj, telefone = :telefone, endereco = :endereco ,cidade = :cidade, estado = :estado where id = :id ";
+			$dados=$this->conexao->prepare($query);
+			$dados->bindValue(':logo',$this->hospital->__get('logo'));
+			$dados->bindValue(':logo_caminho',$this->hospital->__get('logo_caminho'));
+			$dados->bindValue(':nome',$this->hospital->__get('nome'));
+			$dados->bindValue(':email',$this->hospital->__get('email'));
+			$dados->bindValue(':senha',$this->hospital->__get('senha'));
+			$dados->bindValue(':cnpj',$this->hospital->__get('cnpj'));
+			$dados->bindValue(':telefone',$this->hospital->__get('telefone'));
+			$dados->bindValue(':endereco',$this->hospital->__get('endereco'));
+			$dados->bindValue(':cidade',$this->hospital->__get('cidade'));
+			$dados->bindValue(':estado',$this->hospital->__get('estado'));
+			$dados->bindValue(':id',$this->hospital->__get('id'));
+			$dados->execute();
 		}
 
 

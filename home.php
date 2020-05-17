@@ -60,9 +60,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -169,7 +171,7 @@
 
         <div class="row mt-5">
           <div class="col-md-12 cabeçalho-home pt-2 pb-2 pl-5">
-            <h4 class="text-light"><i class="fas fa-hospital pr-4"></i>
+            <h4 class="text-light"><i class="fas fa-hospital pr-3"></i>
               <?= $dados['nome'] ?></h4>
           </div>       
         </div>
@@ -226,6 +228,9 @@
             <i class="fas fa-layer-group text-dark fa-4x ico"></i>
           </div>
 
+<!---- exibe se o usuario for admin ---->    
+    <?php if($_SESSION['perfil'] == 'admin'){ ?>
+
           <div class="item item3">
             <div class="paragrafo">
               <h4 class="pl-2"><?= $total_usuarios['total_usuarios'] ?></h4>
@@ -239,8 +244,6 @@
             <i class="fas fa-user text-dark fa-4x ico"></i>
           </div>
 
-  <!---- exibe se o usuario for admin ---->    
-    <?php if($_SESSION['perfil'] == 'admin'){ ?>  
           <div class="item item3">
             <div class="paragrafo">
               <h4 class="pl-2">+</h4>

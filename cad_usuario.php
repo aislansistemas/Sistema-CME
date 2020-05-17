@@ -7,9 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sistema - CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -112,7 +114,16 @@
 
     <section>
       <div class="container-fluid mb-5" id="cont-principal">
-       
+        <!--= feedback de erro no cadastro=-->
+          <?php if(isset($_GET['existente'])){ ?>
+                <div class="alert alert-danger alert-dismissible text-center">
+                  <button class="close" type="button" data-dismiss="alert">
+                    &times;
+                  </button>
+                  <span class="">Erro, Já existe um Usuario cadastrado com esse E-Mail!</span>
+                </div>
+          <?php } ?>
+        <!--= ======-->
         <div class="row ml-2 mr-2" id="row-cad-hospital">
           <div class="col-md-8 bg-light mx-auto mt-4 pt-4 pl-5 pr-5">
             <h3 class="text-center pb-3">Cadastro de Usuario</h3>

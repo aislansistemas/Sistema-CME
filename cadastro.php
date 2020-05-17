@@ -11,9 +11,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -32,21 +34,21 @@
 
     <!--= feedback de erro no cadastro=-->
             <?php if(isset($_GET['erro'])){ ?>
-                  <div class="alert alert-danger alert-dismissible">
+                  <div class="alert alert-danger alert-dismissible text-center">
                     <button class="close" type="button" data-dismiss="alert">
                     &times;
                     </button>
-                    <span class="">Error Dados inválidos!</span>
+                    <span class="">Error! Dados inválidos</span>
                   </div>
             <?php } ?>
         <!--= ======-->
         <!--= feedback de email ja existente=-->
             <?php if(isset($_GET['existente'])){ ?>
-                  <div class="alert alert-danger alert-dismissible">
+                  <div class="alert alert-danger alert-dismissible text-center">
                     <button class="close" type="button" data-dismiss="alert">
                     &times;
                     </button>
-                    <span class="">Error Já existe E-mail com o mesmo nome cadastrado!</span>
+                    <span class="">Erro, Já existe um Usuario cadastrado com esse E-Mail!</span>
                   </div>
             <?php } ?>
         <!--= ======-->

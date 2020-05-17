@@ -1,8 +1,8 @@
 <?php
   session_start();
-  if(!isset($_SESSION) || $_SESSION == null){
+  if(!isset($_SESSION) || $_SESSION == null || $_SESSION['perfil'] == 'comum'){
     header('Location: index.php');
-    }
+  }
 
   require_once "Database/Conexao.php";
   require_once "Models/Usuario.php";
@@ -18,9 +18,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -127,11 +129,21 @@
         <div class="container mb-5" id="cont"> 
          <!--= feedback de cadastro feito com sucesso=-->
       <?php if(isset($_GET['cadastrado'])){ ?>
-            <div class="alert alert-primary alert-dismissible">
+            <div class="alert alert-primary alert-dismissible text-center">
               <button class="close" type="button" data-dismiss="alert">
               &times;
               </button>
               <span class="">Usuario Cadastrado com sucesso!</span>
+            </div>
+      <?php } ?>
+      <!--= ======-->  
+       <!--= feedback de cadastro feito com sucesso=-->
+      <?php if(isset($_GET['editado'])){ ?>
+            <div class="alert alert-primary alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Perfil do(a) usuario(a) <?= $_GET['nome'] ?> Editado com sucesso!</span>
             </div>
       <?php } ?>
       <!--= ======-->  
@@ -146,9 +158,11 @@
             <table class="table table-light table-striped table-hover text-secondary tabela-materiais table-bordered" id="tabela-materias">
               <thead class="text-light head-table">
                 <tr>
-                  <th scope="col">Nome do Usuario</th>
+                  <th scope="col">Nome</th>
                   <th scope="col">E-mail</th>
+                  <th scope="col">Perfil</th>
                   <th scope="col">Situação</th>
+                  <th scope="col"></th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -156,8 +170,19 @@
         <?php foreach ($lista as $key => $dados){ ?>
                 <tr class="">
                   <td scope="col"><?= ucfirst($dados['nome']) ?></td>
-                  <td scope="col"><?= $dados['email'] ?></td> 
+                  <td scope="col"><?= $dados['email'] ?></td>
+                  <td scope="col">Usuario <?= $dados['perfil'] ?></td> 
                   <td scope="col"><?= ucfirst($dados['situacao']) ?></td> 
+
+          <?php if($dados['perfil'] != 'admin'){ ?>
+                  <td scope="col">
+                    <a class="btn btn-primary" href="edit_perfil_usuario.php?id=<?= $dados['id'] ?>&nome=<?= $dados['nome'] ?>&perfil=<?= $dados['perfil'] ?>"><i class="far fa-edit"></i></a>
+                  </td>
+          <?php }else{ ?>
+                   <td scope="col">
+                    
+                   </td>
+          <?php } ?>
 
                   <td scope="col">
           <?php if($_SESSION['perfil'] == 'admin'){ ?>          
@@ -170,6 +195,7 @@
                     <button onclick="ativaUsuario(<?= $dados['id'] ?>,'<?= $_SESSION['id_hospital'] ?>')" class="btn btn-success"><i class="far fa-check-square"></i></button>
           <?php } } ?>            
                   </td>
+
                   
                 </tr>
         <?php } ?>
@@ -180,9 +206,6 @@
           </div>
           </div>
     </section>
-
-
-
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

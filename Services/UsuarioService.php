@@ -97,6 +97,25 @@
 			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));
 			$stmt->execute();
 		}
+
+		public function EditaUsuario(){
+			$query="update tb_usuarios set nome = :nome, email = :email, senha = :senha where id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':nome',$this->usuario->__get('nome'));
+			$stmt->bindValue(':email',$this->usuario->__get('email'));
+			$stmt->bindValue(':senha',$this->usuario->__get('senha'));
+			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));
+			$stmt->execute();
+		}
+
+		public function EditaPerfilUsuario(){
+			$query="update tb_usuarios set perfil = :perfil where id = :id and id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':perfil',$this->usuario->__get('perfil'));
+			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));
+			$stmt->bindValue(':id',$this->usuario->__get('id'));
+			$stmt->execute();
+		}
 		
 	}
 ?>

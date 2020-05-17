@@ -17,9 +17,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -135,7 +137,7 @@
               
               <div class="col-md-4">
                 <label >Lote</label>
-                <input class="form-control" type="text" name="lote"  required="" placeholder="Nº Seq.Automático">
+                <input class="form-control" type="number" name="lote"  required="" placeholder="Nº">
               </div>
               <div class="col-md-4">
                 <label>Início do ciclo</label>
@@ -151,16 +153,16 @@
             <div class="row mb-4">
               <div class="col-md-3">
                 <label>NºCiclo</label>
-                <input class="form-control" type="number" name="numero_do_ciclo" required="" placeholder="55">
+                <input class="form-control" type="number" name="numero_do_ciclo" required="">
               </div>
               <div class="col-md-2">
                 <label>Pressão</label>
-                <input class="form-control" type="text" name="pressao" required="" placeholder="2,5">
+                <input class="form-control" type="text" name="pressao" required="">
               </div>
 
               <div class="col-md-3">
-                <label>Temp.Interna</label>
-                <input class="form-control" type="text" name="temperatura_interna" required="" placeholder="134">
+                <label>Temp.Interna (134º)</label>
+                <input class="form-control" type="text" name="temperatura_interna" required="">
               </div>
               <div class="col-md-4">
                 <label>Horário que atingiu os 134º</label>

@@ -11,10 +11,11 @@ if (!isset($_SESSION) || $_SESSION == null) {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>CME</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -129,8 +130,12 @@ if (!isset($_SESSION) || $_SESSION == null) {
                 <div class="row mb-4">
                     <div class="col-md-3">                
                         <label class="text-dark">Saída para:</label>
-                        <input class="form-control mb-1" type="text" name="saida_para" required=""
-                               placeholder="Paciente/Empresa/Setor">
+                        <select class="form-control mb-1" name="saida_para" required="">
+                          <option>Selecione:</option>
+                          <option value="Paciente">Paciente</option>
+                          <option value="Empresa">Empresa</option>
+                          <option value="Setor">Setor</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label class="text-dark">NºRegistro</label>

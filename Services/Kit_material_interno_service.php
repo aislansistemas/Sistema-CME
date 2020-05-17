@@ -28,14 +28,14 @@
 			$stmt->execute();
 		}
 		public function listaKitInterno($pagina,$limit){
-			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data,'%d/%m/%Y %h:%m') as data_recebido from tb_kit_material_recebido_interno as kit, tb_materiais as m, tb_materiais_recebidos as mr where kit.id_material=m.id and kit.id_recebido=mr.id and kit.id_hospital= :id_hospital and kit.status = 'recebido' order by kit.id desc limit ".$pagina.",".$limit."";
+			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data,'%d/%m/%Y') as data_recebido from tb_kit_material_recebido_interno as kit, tb_materiais as m, tb_materiais_recebidos as mr where kit.id_material=m.id and kit.id_recebido=mr.id and kit.id_hospital= :id_hospital and kit.status = 'recebido' order by kit.id desc limit ".$pagina.",".$limit."";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$this->kit_mat_inter->__get('id_hospital'));
 			$stmt->execute();
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		public function getMaterialInterno(){
-			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data,'%d/%m/%Y %h:%m') as data_recebido from tb_kit_material_recebido_interno as kit, tb_materiais as m, tb_materiais_recebidos as mr where kit.id_material=m.id and kit.id_recebido=mr.id and kit.id_hospital= :id_hospital and kit.status= 'recebido' and kit.id = :id";
+			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data,'%d/%m/%Y') as data_recebido from tb_kit_material_recebido_interno as kit, tb_materiais as m, tb_materiais_recebidos as mr where kit.id_material=m.id and kit.id_recebido=mr.id and kit.id_hospital= :id_hospital and kit.status= 'recebido' and kit.id = :id";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$this->kit_mat_inter->__get('id_hospital'));
 			$stmt->bindValue(':id',$this->kit_mat_inter->__get('id'));
@@ -44,7 +44,7 @@
 		}
 		///metodo de buscar material pela descricao
 		public function buscaMaterialInterno($material,$tipobusca,$pagina,$limit){
-			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data, '%d/%m/%Y %h:%m') as data_recebido FROM tb_kit_material_recebido_interno as kit inner join tb_materiais as m inner JOIN tb_materiais_recebidos as mr on(kit.id_material = m.id and kit.id_recebido = mr.id and ".$tipobusca." like :material and kit.status = 'recebido' and kit.id_hospital= :id_hospital) ORDER by data_recebido desc limit ".$pagina.",".$limit."";
+			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data, '%d/%m/%Y') as data_recebido FROM tb_kit_material_recebido_interno as kit inner join tb_materiais as m inner JOIN tb_materiais_recebidos as mr on(kit.id_material = m.id and kit.id_recebido = mr.id and ".$tipobusca." like :material and kit.status = 'recebido' and kit.id_hospital= :id_hospital) ORDER by data_recebido desc limit ".$pagina.",".$limit."";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':material','%'.$material.'%');
 			$stmt->bindValue(':id_hospital',$this->kit_mat_inter->__get('id_hospital'));

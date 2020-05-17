@@ -2,9 +2,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
+	<title>AMD2Saúde</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -23,7 +25,7 @@
 <body style="background: rgba(2, 218, 168, 0.9); no-repeat;background-size: 100% 100%">
 		<!--= feedback de cadastro feito com sucesso=-->
 			<?php if(isset($_GET['criado'])){ ?>
-			      <div class="alert alert-primary alert-dismissible">
+			      <div class="alert alert-primary alert-dismissible text-center">
 			        <button class="close" type="button" data-dismiss="alert">
 			        &times;
 			        </button>
@@ -33,21 +35,21 @@
     	<!--= ======-->
     	<!--= feedback recuperação de senha=-->
 			<?php if(isset($_GET['enviado'])){ ?>
-			      <div class="alert alert-primary alert-dismissible">
+			      <div class="alert alert-primary alert-dismissible text-center">
 			        <button class="close" type="button" data-dismiss="alert">
 			        &times;
 			        </button>
-			        <span class="">Enviamos sua senha por E-mail!</span>
+			        <span class="">Enviamos sua senha para seu E-mail!</span>
 			      </div>
     		<?php } ?>
     	<!--= ======-->
     	<!--= feedback de email ou senha invalidos=-->
     		<?php if(isset($_GET['invalido'])){ ?>
-			      <div class="alert alert-danger alert-dismissible">
+			      <div class="alert alert-danger alert-dismissible text-center">
 			        <button class="close" type="button" data-dismiss="alert">
 			        &times;
 			        </button>
-			        <span class="">E-mail ou senha inválidos!</span>
+			        <span class="">E-mail ou senha inválido(s)!</span>
 			      </div>
     		<?php } ?>
 		<!--= ======-->

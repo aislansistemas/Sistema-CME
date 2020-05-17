@@ -43,9 +43,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title>CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -149,17 +151,18 @@
 
     <section>
         <h4 style="margin-top: 60px" class="text-center mb-4 text-primary">Materiais externos liberados do Sistema</h4>
-        <!--= feedback de cadastro feito com sucesso=-->
+        
+        <div class="container mb-5" id="cont">
+      <!--= feedback de cadastro feito com sucesso=-->
       <?php if(isset($_GET['cadastrado'])){ ?>
-            <div class="alert alert-success alert-dismissible">
+            <div class="alert alert-success alert-dismissible text-center">
               <button class="close" type="button" data-dismiss="alert">
               &times;
               </button>
-              <span class="">Material registrado com sucesso!</span>
+              <span class="">Saída do material feita com sucesso!</span>
             </div>
         <?php } ?>
-      <!--= ======-->
-        <div class="container mb-5" id="cont"> 
+      <!--= ======--> 
             <div class="container" style="background: rgba(150,150,150,0.2);border-radius: 8px 8px 0px 0px">
               <div class="row p-1 pt-2">
               <div class="col-md-10">

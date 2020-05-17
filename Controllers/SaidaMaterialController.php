@@ -33,7 +33,7 @@
 			$kit_proce_service = new Kit_proce_interno_service($kit_proce,$conexao);
 			$getMaterialProcesado=$kit_proce_service->getKitProcessandoInterno();
 
-			if($dados['qtd'] > $getMaterialProcesado[0]['quantidade']){
+		/*	if($dados['qtd'] > $getMaterialProcesado[0]['quantidade']){
 				$_SESSION['erroSaidaQtd'] = "O item ". $getMaterialRecbido[0]['descricao'] ." ultrapassou quantidade permitida.";
 				header('Location: ../cadastro_saido_interno.php');
 				exit;
@@ -42,7 +42,7 @@
 				$_SESSION['erroSaidaQtd'] = "O item ". $getMaterialRecbido[0]['descricao'] ." está zerado.";
 				header('Location: ../cadastro_saido_interno.php');
 				exit;
-			}
+			}*/
 		}
 
 		$mat_saida = new Saida_material();

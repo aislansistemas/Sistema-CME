@@ -15,9 +15,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sistema - CME</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>AMD2Saúde</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" type="image/png" href="img/logo-pequena.png"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -68,7 +70,7 @@
 
     <!--= feedback de hospital desativado=-->
       <?php if(isset($_GET['inativado'])){ ?>
-            <div class="alert alert-primary alert-dismissible">
+            <div class="alert alert-primary alert-dismissible text-center">
               <button class="close" type="button" data-dismiss="alert">
               &times;
               </button>
@@ -78,11 +80,21 @@
     <!--= ======-->
     <!--= feedback de cadastro feito com sucesso=-->
       <?php if(isset($_GET['ativado'])){ ?>
-            <div class="alert alert-primary alert-dismissible">
+            <div class="alert alert-primary alert-dismissible text-center">
               <button class="close" type="button" data-dismiss="alert">
               &times;
               </button>
               <span class="">Hospital <?= $_GET['hospital'] ?> abilitado com sucesso!</span>
+            </div>
+        <?php } ?>
+    <!--= ======-->
+    <!--= feedback de cadastro feito com sucesso=-->
+      <?php if(isset($_GET['editado'])){ ?>
+            <div class="alert alert-primary alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Hospital Atualizado com sucesso!</span>
             </div>
         <?php } ?>
     <!--= ======-->
@@ -94,9 +106,10 @@
             </div>
       </div>
     <div class="table-responsive">
-      <table class="table" id="tabela-materias">
+      <table class="table table-bordered" id="tabela-materias">
         <thead class="head-table text-light">
           <tr>
+            <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col">Logo</th>
             <th scope="col">Empresa/Hospital</th>
@@ -121,6 +134,11 @@
            <button onclick="ativaHospital(<?= $dado['id'] ?>)" class="btn btn-success"><i class="far fa-check-square"></i></button>
            </td>
   <?php } ?>
+            <td>
+              <a href="edit_hospital.php?id=<?= $dado['id'] ?>&logo=upload/<?= $dado['logo'] ?>&nome=<?= $dado['nome'] ?>&email=<?= $dado['email'] ?>&senha=<?= $dado['senha'] ?>&cnpj=<?= $dado['cnpj'] ?>&telefone=<?= $dado['telefone'] ?>&endereco=<?= $dado['endereco'] ?>&cidade=<?= $dado['cidade'] ?>&estado=<?= $dado['estado'] ?>" class="btn btn-primary">
+                <i class="far fa-edit"></i>
+              </a>
+            </td>
 
             <td><img width="130" height="130" src="upload/<?= $dado['logo'] ?>"></td>
             <td><?= $dado['nome'] ?></td>
@@ -140,8 +158,9 @@
     </div>
 </section>
 
-   <!-- JavaScript (Opcional) -->
+    <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script type="text/javascript" src="js/edit_hospital.js"></script>
     <script type="text/javascript" src="js/hospitais.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
