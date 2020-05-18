@@ -39,6 +39,13 @@
 			return $dados->fetchAll(PDO::FETCH_ASSOC);
 		}	
 
+		public function BuscaTodosHospitais(){
+			$query="select * from tb_hospitais";
+			$dados=$this->conexao->prepare($query);
+			$dados->execute();
+			return $dados->fetchAll(PDO::FETCH_ASSOC);
+		}
+
 		public function BuscaHospitaisPorId(){
 			$query="select * from tb_hospitais where id= :id_hospital";
 			$dados=$this->conexao->prepare($query);

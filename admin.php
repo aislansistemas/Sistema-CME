@@ -10,7 +10,7 @@
        $conexao= new Conexao();
        $hospital = new Hospital();
        $hop_service = new HospitalService($hospital,$conexao);
-       $dados=$hop_service->BuscaHospitais();
+       $dados=$hop_service->BuscaTodosHospitais();
 ?>      
 <!DOCTYPE html>
 <html>

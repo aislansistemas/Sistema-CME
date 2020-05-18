@@ -3,6 +3,7 @@
   if(!isset($_SESSION) || $_SESSION == null){
     header('Location: index.php');
   }
+ // print_r($_SESSION);
   require 'Database/Conexao.php';
   require 'Models/Hospital.php';
   require 'Models/Usuario.php';

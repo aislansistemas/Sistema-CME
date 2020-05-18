@@ -23,12 +23,12 @@
 		}
 		public function Login(){
 			$query="select * from tb_usuarios
-			 where email = :email and senha = :senha";
+			 where email = :email and senha = :senha and situacao = 'ativo' ";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':email',$this->usuario->__get('email'));
 			$stmt->bindValue(':senha',$this->usuario->__get('senha'));
 			$stmt->execute();
-			return $stmt->fetch();
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		public function buscarEmailUsuario(){
 			$query="select * from tb_usuarios 
@@ -115,6 +115,35 @@
 			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));
 			$stmt->bindValue(':id',$this->usuario->__get('id'));
 			$stmt->execute();
+		}
+
+		public function BuscaEmailIdHospital(){
+			$query="select * from tb_usuarios 
+			where email = :email and id_hospital = :id_hospital";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':email',$this->usuario->__get('email'));
+			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));			
+			$stmt->execute();
+			return $stmt->fetch();
+		}
+
+		public function ListaHospitaisPorUsuario(){
+			$query="select * from tb_usuarios as u inner join tb_hospitais as h on(u.id_hospital = h.id) where u.email = :email and u.senha = :senha";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':email',$this->usuario->__get('email'));
+			$stmt->bindValue(':senha',$this->usuario->__get('senha'));
+			$stmt->execute();
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		public function BuscaUsuarioPorEmailSenhaIdHospital(){
+			$query="select * from tb_usuarios where email = :email and senha = :senha and id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':email',$this->usuario->__get('email'));
+			$stmt->bindValue(':senha',$this->usuario->__get('senha'));
+			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));
+			$stmt->execute();
+			return $stmt->fetch();
 		}
 		
 	}

@@ -14,32 +14,35 @@
 				$usuario->__set('email',$_POST['email']);
 				$usuario->__set('senha',$_POST['senha']);
 				$usuario_service=new UsuarioService($usuario,$conexao);
-				$retorno=$usuario_service->Login();				
-			//////	
+				$retorno=$usuario_service->Login();	
+				//print_r($retorno);
+				//echo count($retorno);
+
 				$emMaster="m4saude@gmail.com";
 				$seMaster="P@cs2020";
 				if($_POST['email'] == $emMaster && $_POST['senha'] == $seMaster){
 					$_SESSION['email_master']=$emMaster;
 					header('Location: ../admin.php');
 				}else{
-				if($_POST['email'] == $retorno['email'] 
-					&& $_POST['senha'] == $retorno['senha'] && $retorno['situacao'] == 'ativo'){
-					//metodo de login com sucesso
-
-					session_start();
-					$_SESSION['id_usuario'] = $retorno['id'];
-					$_SESSION['nome'] = $retorno['nome'];
-					$_SESSION['email'] = $retorno['email'];
-					$_SESSION['id_hospital'] = $retorno['id_hospital'];
-					$_SESSION['perfil'] = $retorno['perfil'];
-
-					header('Location: ../home.php');
-				}else{
 					
-					// url de erro caso o usuario seja invalido
-					header('Location: ../index.php?invalido');
+					if(count($retorno) == 1 && count($retorno) > 0){
+						//print_r($retorno[0]);
+						$_SESSION['id_usuario'] = $retorno[0]['id'];
+						$_SESSION['nome'] = $retorno[0]['nome'];
+						$_SESSION['email'] = $retorno[0]['email'];
+						$_SESSION['id_hospital'] = $retorno[0]['id_hospital'];
+						$_SESSION['perfil'] = $retorno[0]['perfil'];
+						print_r($_SESSION);
+						header('Location: ../home.php');
+					}else if(count($retorno) == 2 && count($retorno) > 0){
+						$_SESSION['email'] = $retorno[0]['email'];
+						$_SESSION['senha'] = $retorno[0]['senha'];
+						
+						header('Location: ../select_hospital.php');
+					}else if(count($retorno) == 0){
+						header('Location: ../index.php?invalido');
+					}
 
-				}
 				}
 
 			}
@@ -48,15 +51,15 @@
 		if(isset($_POST) && $_POST != null){
 			$conexao = new Conexao();
 			$usuario = new Usuario();	
+			$usuario->__set('nome',$_POST['nome']);
 			$usuario->__set('email',$_POST['email']);
+			$usuario->__set('senha',$_POST['senha']);
+			$usuario->__set('id_hospital',$_POST['hospital']);
 			$usuario_service = new UsuarioService($usuario,$conexao);
-			$dados=$usuario_service->buscarEmailUsuario();
+			$dados=$usuario_service->BuscaEmailIdHospital();
 			print_r($dados);
-			if($dados['email'] != $_POST['email']){						
-				$usuario->__set('nome',$_POST['nome']);
-				$usuario->__set('email',$_POST['email']);
-				$usuario->__set('senha',$_POST['senha']);
-				$usuario->__set('id_hospital',$_POST['hospital']);
+			if($dados['email'] != $_POST['email'] && $dados['id_hospital'] != $_POST['hospital']){				
+
 				$usuario_service->cadastrarUsuario();
 				header('Location: ../index.php?criado');
 			}else{
@@ -114,6 +117,22 @@
 		$usuario_service = new UsuarioService($usuario,$conexao);
 		$dados=$usuario_service->EditaPerfilUsuario();
 		header('Location: ../usuarios.php?editado&nome='.$_POST['nome']);
+	}else if(isset($_GET['acao']) && $_GET['acao'] == 'escolheHospital'){
+		//print_r($_GET);
+		$conexao = new Conexao();
+		$usuario = new Usuario();
+		$usuario->__set('id_hospital',$_GET['id_hospital']);
+		$usuario->__set('email',$_GET['email']);
+		$usuario->__set('senha',$_GET['senha']);
+		$usuario_service = new UsuarioService($usuario,$conexao);
+		$dados = $usuario_service->BuscaUsuarioPorEmailSenhaIdHospital();
+		$_SESSION['id_usuario'] = $dados['id'];
+		$_SESSION['nome'] = $dados['nome'];
+		$_SESSION['email'] = $dados['email'];
+		$_SESSION['id_hospital'] = $dados['id_hospital'];
+		$_SESSION['perfil'] = $dados['perfil'];
+		header('Location: ../home.php');
+
 	}
 
 ?>
