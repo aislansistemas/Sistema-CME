@@ -6,6 +6,7 @@
 		private $id_processado;
 		private $id_hospital;
 		private $id_material;
+		private $id_kit_recebido;
 		private $quantidade;
 		private $status;
 		private $id_processado_material;

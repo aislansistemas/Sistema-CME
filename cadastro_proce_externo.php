@@ -188,7 +188,9 @@
 
                                 <tr data-id="<?php echo $material['id']; ?>">
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
+
                                     <td class="material-qt"><?php echo $material['qtd']; ?></td>
+
                                     <td>
                                         <a class="btn btn-danger text-light" onclick="limparProcessados(<?= $key ?>,'<?= $material['nome'] ?>')"><i class="far fa-times-circle"></i></a>
                                     </td>

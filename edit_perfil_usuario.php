@@ -131,9 +131,8 @@
                 <option value="admin">Usuario Admin</option>
               </select>
 
-              <p>
               	<button class="btn btn-primary mt-4 mb-5">ATUALIZAR</button>
-              </p>
+              
             </form>
           </div>
         </div>

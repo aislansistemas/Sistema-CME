@@ -181,6 +181,7 @@ if (!isset($_SESSION) || $_SESSION == null) {
 
                                 <tr data-id="<?php echo $material['nome']; ?>">
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
+
                                     <td class="material-qt"><?php echo $material['qtd']; ?></td>
                                     <td>
                                

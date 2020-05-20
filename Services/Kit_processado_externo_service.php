@@ -11,20 +11,22 @@
 		}	
 		public function cadastraKitProcessado(){
 			$query="insert into tb_kit_material_processado_externo
-			(id_processado,id_hospital,material,quantidade, `status`)
-			values(:id_processado, :id_hospital, :material, :quantidade, :status)";
+			(id_processado,id_hospital,id_kit_recebido,material,quantidade, `status`)
+			values(:id_processado, :id_hospital, :id_kit_recebido, :material, :quantidade, :status)";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_processado',$this->kit_proce_externo->__get('id_processado'));
 			$stmt->bindValue(':id_hospital',$this->kit_proce_externo->__get('id_hospital'));
+			$stmt->bindValue(':id_kit_recebido',$this->kit_proce_externo->__get('id_kit_recebido'));
 			$stmt->bindValue(':material',$this->kit_proce_externo->__get('material'));
 			$stmt->bindValue(':quantidade',$this->kit_proce_externo->__get('quantidade'));
 			$stmt->bindValue(':status',$this->kit_proce_externo->__get('status'));
 			$stmt->execute();
 		}
 		public function alterarKitProcessadoStatus(){
-			$query="update tb_kit_material_processado_externo SET `status` = :status WHERE (`id` = :id_processado_material);";
+			$query="update tb_kit_material_processado_externo SET `status` = :status WHERE (`id` = :id_processado_material and id_hospital = :id_hospital);";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_processado_material',$this->kit_proce_externo->__get('id_processado_material'));
+			$stmt->bindValue(':id_hospital',$this->kit_proce_externo->__get('id_hospital'));
 			$stmt->bindValue(':status',$this->kit_proce_externo->__get('status'));
 			$stmt->execute();
 		}
@@ -56,6 +58,15 @@
 			$query="select count(*) as total_proce_externo
 			from tb_kit_material_processado_externo where id_hospital = :id_hospital and status = 'processado' ";
 			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id_hospital',$this->kit_proce_externo->__get('id_hospital'));
+			$stmt->execute();
+			return $stmt->fetch();
+		}
+
+		public function DeletaProceExterno(){
+			$query="delete from tb_kit_material_processado_externo where id = :id and id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id',$this->kit_proce_externo->__get('id'));
 			$stmt->bindValue(':id_hospital',$this->kit_proce_externo->__get('id_hospital'));
 			$stmt->execute();
 			return $stmt->fetch();

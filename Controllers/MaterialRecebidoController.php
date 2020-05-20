@@ -16,6 +16,8 @@
 	    // Receber os dados:
 	    //print_r($_SESSION);
 		//print_r($_POST);
+		echo count($_SESSION['materiais_enviados']);
+		if(count($_SESSION['materiais_enviados']) > 0){
 		$conexao = new Conexao();
 		$mat_recebido = new MaterialRecebido();
 		$mat_recebido->__set('id_hospital',$_SESSION['id_hospital']);
@@ -47,10 +49,14 @@
 		}
 		unset($_SESSION['materiais_enviados']);
 		header('Location: ../material_interno.php?cadastrado');
+		}else{
+			header('Location: ../cadastrorecebidos_interno.php?erro');
+		}
 		
 //////
 	}else if(isset($_GET['acao']) && $_GET['acao'] == 'cadastrar_externo'){
 
+		if(count($_SESSION['materiais_enviados_externo']) > 0){
 		$conexao = new Conexao();
 		$mat_recebido = new MaterialRecebido();
 		$mat_recebido->__set('id_hospital',$_SESSION['id_hospital']);
@@ -75,6 +81,72 @@
 		}
 		unset($_SESSION['materiais_enviados_externo']);
 		header('Location: ../material_externo.php?cadastrado');
+		}else{
+			header('Location: ../cadastrorecebidos_externo.php?erro');
+		}
 
+	}/*else if(isset($_GET['acao']) && $_GET['acao'] == 'deletar_recebido_interno'){
+		$conexao = new Conexao();
+		$mat_recebido = new Kit_Material_interno();
+		$mat_recebido->__set('id_hospital',$_POST['id_hospital']);
+		$mat_recebido->__set('id',$_POST['id']);
+		$mat_service = new Kit_mat_inter_service($mat_recebido,$conexao);
+		$mat_service->DeletarKitInterno();
+
+		$mat_recebido1 = new MaterialRecebido();
+		$mat_recebido1->__set('id_hospital',$_POST['id_hospital']);
+		$mat_recebido1->__set('id',$_POST['id_recebido']);
+		$mat_service1 = new MaterialRecebidoService($mat_recebido1,$conexao);
+		$mat_service1->DeletaMaterialrecebido();
+
+		$material = new Material();
+		$material->__set('id',$_POST['id_material']);
+		$material->__set('status_material','disponivel');
+		$material->__set('id_hospital',$_POST['id_hospital']);
+		$material_service = new MaterialService($material,$conexao);
+		$material_service->editarStatus();
+
+		header('Location: ../material_interno.php?deletado');
+
+	}*/else if(isset($_GET['acao']) && $_GET['acao'] == 'deletar_recebido_interno'){
+		$conexao = new Conexao();
+		$mat_recebido = new Kit_Material_interno();
+		$mat_recebido->__set('id_hospital',$_POST['id_hospital']);
+		$mat_recebido->__set('id',$_POST['id']);
+		$mat_service = new Kit_mat_inter_service($mat_recebido,$conexao);
+		$mat_service->DeletarKitInterno();
+
+		$mat_recebido1 = new MaterialRecebido();
+		$mat_recebido1->__set('id_hospital',$_POST['id_hospital']);
+		$mat_recebido1->__set('id',$_POST['id_recebido']);
+		$mat_service1 = new MaterialRecebidoService($mat_recebido1,$conexao);
+		$mat_service1->DeletaMaterialrecebido();
+
+		$material = new Material();
+		$material->__set('id',$_POST['id_material']);
+		$material->__set('status_material','disponivel');
+		$material->__set('id_hospital',$_POST['id_hospital']);
+		$material_service = new MaterialService($material,$conexao);
+		$material_service->editarStatus();
+
+		header('Location: ../material_interno.php?deletado');
+
+	}else if(isset($_GET['acao']) && $_GET['acao'] == 'deletar_recebido_externo'){
+
+		print_r($_POST);
+		$conexao = new Conexao();
+		$kit_externo= new Kit_Material_externo();
+		$kit_externo->__set('id',$_POST['id']);
+		$kit_externo->__set('id_hospital',$_POST['id_hospital']);
+		$kit_externo_service = new Kit_mat_extern_service($kit_externo,$conexao);
+		$kit_externo_service->DeletarKitExterno();
+
+		$mat_recebido1 = new MaterialRecebido();
+		$mat_recebido1->__set('id_hospital',$_POST['id_hospital']);
+		$mat_recebido1->__set('id',$_POST['id_recebido']);
+		$mat_service1 = new MaterialRecebidoService($mat_recebido1,$conexao);
+		$mat_service1->DeletaMaterialrecebido();
+		header('Location: ../material_externo.php?deletado');
 	}
+
 ?>

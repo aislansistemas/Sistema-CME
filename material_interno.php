@@ -147,7 +147,7 @@
     </header>
 
     <section>
-        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary">Materiais Internos recebidos e lavados</h4>
+        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary" id="titulo-pagina">Materiais Internos recebidos e lavados</h4>
       
         <div id="msg-error"></div>
       <!--= ======-->
@@ -169,6 +169,16 @@
               <span class="">Selecione um método de busca!</span>
             </div>
         <?php } ?>
+         <?php if(isset($_GET['deletado'])){ ?>
+            <div class="alert alert-success alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Material deletado com sucesso!</span>
+            </div>
+        <?php } ?>
+
+
             <div class="container" style="background: rgba(150,150,150,0.2);border-radius: 8px 8px 0px 0px">
               <div class="row p-1 pt-2">
               <div class="col-md-6">
@@ -206,11 +216,16 @@
             </div>
 
            <div class="table-responsive">
-            <table class="table table-light table-striped table-hover text-secondary tabela-materiais  table-bordered" id="tabela-materias">
+            <table class="table table-light table-striped text-secondary tabela-materiais  table-bordered" id="tabela-materias">
               <thead class="text-light head-table">
                 <tr>
                   <th scope="col">Ação</th>
-                  <th scope="col">Id</th>
+
+        <?php if($_SESSION['perfil'] == 'admin'){ ?>
+                  <th scope="col">Deletar</th>
+        <?php } ?>
+
+                  <th scope="col">Id</th>                  
                   <th scope="col">Material</th>
                   <th scope="col">Entregue por</th>
                   <th scope="col">Recebido por</th>
@@ -227,6 +242,15 @@
       <?php }else{ ?>
           <td></td>
       <?php } ?>
+
+      <?php if($_SESSION['perfil'] == 'admin'){ ?>
+                  <td>
+                    <button onclick="deletaInterno(<?= $dados['id_kit'] ?>,<?= $_SESSION['id_hospital'] ?>,<?= $dados['id_material'] ?>,<?= $dados['id_recebido'] ?>)" class="btn btn-danger">
+                      <i class="far fa-times-circle"></i>
+                    </button>
+                  </td>
+      <?php } ?>
+
                   <td><?= $dados['id_material'] ?></td>
                   <td><?= $dados['descricao'] ?></td> 
                   <td><?= $dados['quem_entregou'] ?></td>
@@ -279,10 +303,10 @@
 
           var materialIdId = document.getElementsByName("check-material-id");
 
+
           var materialArray = [];
           
           if(materialIdId[0].checked == false){
-              
               var showError = document.getElementById("show-error");
 
               var msgError = '';
@@ -302,7 +326,7 @@
           for (var i=0;i<materialIdId.length;i++){ 
             if (materialIdId[i].checked == true){ 
               var meteriais = materialIdId[i].value.split(",");
-
+              
               materialArray.push({"id": meteriais[0], "id_recebido_material": meteriais[1]});
 
             }
@@ -343,5 +367,6 @@
     });
 
   </script>
+  <script type="text/javascript" src="js/deletar_material.js"></script>
 </body>
 </html>

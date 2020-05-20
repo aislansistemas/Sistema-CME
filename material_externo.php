@@ -143,7 +143,7 @@
     </header>
 
     <section>
-        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary">Materiais Externos recebidos e lavados</h4>
+        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary" id="titulo-pagina">Materiais Externos recebidos e lavados</h4>
        
         <div id="msg-error"></div>
       <!--= ======-->
@@ -163,6 +163,14 @@
               &times;
               </button>
               <span class="">Selecione um método de busca!</span>
+            </div>
+        <?php } ?>
+        <?php if(isset($_GET['deletado'])){ ?>
+            <div class="alert alert-success alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Material deletado com sucesso!</span>
             </div>
         <?php } ?>
             <div class="container" style="background: rgba(150,150,150,0.2);border-radius: 8px 8px 0px 0px">
@@ -206,6 +214,11 @@
               <thead class="text-light head-table">
                 <tr>
                   <th scope="col">Ação</th>
+
+          <?php if($_SESSION['perfil'] == 'admin'){ ?>        
+                  <th scope="col">Deletar</th>
+          <?php } ?>
+
                   <th scope="col">Id</th>
                   <th scope="col">Material</th>
                   <th scope="col">Quantidade</th>
@@ -225,6 +238,15 @@
           <?php }else{ ?>
                 <td></td>
           <?php } ?>
+
+          <?php if($_SESSION['perfil'] == 'admin'){ ?>
+                    <td>
+                      <button onclick="deletaExterno(<?= $dados['id_kit'] ?>,<?= $_SESSION['id_hospital'] ?>,<?= $dados['id_recebido'] ?>)" class="btn btn-danger">
+                        <i class="far fa-times-circle"></i>
+                      </button>
+                    </td>
+          <?php } ?>
+
                     <td><?= $dados['id_kit'] ?></td>  
                     <td><?= $dados['material'] ?></td>      
                     <td><?= $dados['quantidade'] ?></td>  
@@ -339,5 +361,6 @@
       });
 
     </script>
+    <script type="text/javascript" src="js/deletar_material.js"></script>
 </body>
 </html>

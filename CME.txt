@@ -81,6 +81,7 @@ create table tb_kit_material_processado_interno (
 	id_processado int not null,
 	id_hospital int not null,
 	id_material int not null,	
+	id_kit_recebido int not null,
 	quantidade varchar(3),
 	status varchar(20) default 'processado'
 );
@@ -88,6 +89,7 @@ CREATE TABLE `tb_kit_material_processado_externo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_processado` int(11) NOT NULL,
   `id_hospital` int(11) NOT NULL,
+  id_kit_recebido int not null,
   `material` varchar(100) NOT NULL,
   `quantidade` varchar(3) NOT NULL,
   `status` varchar(20) DEFAULT 'processado',
@@ -109,6 +111,7 @@ CREATE TABLE `tb_kit_material_saido_externo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_saida` int(11) NOT NULL,
   `id_hospital` int(11) NOT NULL,
+  id_kit_processado int not null,
   `material` varchar(100) NOT NULL,
   `quantidade` varchar(3) NOT NULL,
   `status` varchar(20) DEFAULT 'saido',
@@ -119,6 +122,7 @@ create table tb_kit_material_saido_interno (
 	id int not null auto_increment primary key,
 	id_saida int not null,
 	id_hospital int not null,
+	id_kit_processado int not null,
 	id_material int not null,
 	quantidade varchar(3),
 	status varchar(20) default 'saido'

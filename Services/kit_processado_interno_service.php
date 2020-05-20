@@ -11,12 +11,13 @@
 		}	
 		public function cadastraKitProcessado(){
 			$query="insert into tb_kit_material_processado_interno
-			(id_processado,id_hospital,id_material,quantidade, status)
-			values(:id_processado, :id_hospital, :id_material, :quantidade, :status)";
+			(id_processado,id_hospital,id_material,id_kit_recebido,quantidade, status)
+			values(:id_processado, :id_hospital, :id_material, :id_kit_recebido, :quantidade, :status)";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_processado',$this->kit_proce_interno->__get('id_processado'));
 			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
 			$stmt->bindValue(':id_material',$this->kit_proce_interno->__get('id_material'));
+			$stmt->bindValue(':id_kit_recebido',$this->kit_proce_interno->__get('id_kit_recebido'));
 			$stmt->bindValue(':quantidade',$this->kit_proce_interno->__get('quantidade'));
 			$stmt->bindValue(':status',$this->kit_proce_interno->__get('status'));
 			$stmt->execute();
@@ -30,6 +31,17 @@
 			$stmt->bindValue(':status',$this->kit_proce_interno->__get('status'));
 			$stmt->execute();
 		}
+
+		public function alterarKitProcessadoStatusDelecao(){
+			$query="update tb_kit_material_processado_interno SET status = :status WHERE (id = :id and id_hospital = :id_hospital);";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':status',$this->kit_proce_interno->__get('status'));
+			$stmt->bindValue(':id',$this->kit_proce_interno->__get('id'));
+			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
+			
+			$stmt->execute();
+		}
+
 		public function listaKitProcessandoInterno($pagina,$limit){
 			$query="select *, DATE_FORMAT(c.data,'%d/%m/%Y') as data_processado, a.id as id_processando_material from tb_kit_material_processado_interno a INNER JOIN tb_materiais b ON b.id = a.id_material INNER JOIN tb_materiais_processados c ON c.id = a.id_processado WHERE a.id_hospital= :id_hospital and a.status = 'processado' order by a.id desc limit ".$pagina.",".$limit."";
 			$stmt=$this->conexao->prepare($query);
@@ -71,6 +83,13 @@
 			return $stmt->fetch();
 		}
 		
+		public function DeletarProceInterno(){
+			$query="delete from tb_kit_material_processado_interno where id = :id and id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id',$this->kit_proce_interno->__get('id'));
+			$stmt->bindValue(':id_hospital',$this->kit_proce_interno->__get('id_hospital'));
+			$stmt->execute();
+		}
 							
 	}
 ?>

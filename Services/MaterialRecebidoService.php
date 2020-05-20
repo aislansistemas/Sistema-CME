@@ -36,6 +36,13 @@
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		
+		public function DeletaMaterialrecebido(){
+			$query="delete from tb_materiais_recebidos where id = :id and id_hospital = :id_hospital";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id_hospital', $this->material_recebido->__get('id_hospital'));
+			$stmt->bindValue(':id', $this->material_recebido->__get('id'));
+			$stmt->execute();
+		}
 		
 	}
 ?>

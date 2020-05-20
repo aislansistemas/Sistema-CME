@@ -194,6 +194,7 @@
                                 <tr data-id="<?php echo $material['id']; ?>">
                                     <td><?= $material['id'] ?></td>
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
+                                                                     
                                     <td><input class="form-control" style="width: 200px" type="hidden" value="1"></td>
                                     <td>
                                         <a class="btn btn-danger text-light" onclick="limpar(<?= $key ?>, <?= $material['id'] ?>)"><i class="far fa-times-circle"></i></a>

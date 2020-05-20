@@ -120,6 +120,16 @@
             Registro Externo de Materiais Recebidos
           <h4>
 
+            <!--= feedback de cadastro feito com sucesso=-->
+      <?php if(isset($_GET['erro'])){ ?>
+            <div class="alert alert-danger alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Erro! Por favor preencha os dados corretamente</span>
+            </div>
+        <?php } ?>
+      <!--= ======-->
           <form action="Controllers/MaterialRecebidoController.php?acao=cadastrar_externo" method="POST">
 
           <div class="row mb-4">
@@ -153,7 +163,7 @@
             <div class="col-md-6">
               <label>Quantidade</label>
               <div class="input-group">
-                <input class="form-control" type="text" name="quantidade" placeholder="Quantidade" id="material-qtd">
+                <input class="form-control" type="number" name="quantidade" placeholder="Quantidade" id="material-qtd">
              <div class="input-group-prepend">
                 <button class="btn btn-primary input-sumit" id="add-button">Adicionar</button>
               </div>

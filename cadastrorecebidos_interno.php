@@ -130,7 +130,16 @@ require_once "Services/MaterialService.php";
         <h4 class="text-center text-light mt-5 mb-5">
             Registro Interno de Materiais Recebidos
         </h4>
-
+        <!--= feedback de cadastro feito com sucesso=-->
+      <?php if(isset($_GET['erro'])){ ?>
+            <div class="alert alert-danger alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Erro! Por favor preencha os dados corretamente</span>
+            </div>
+        <?php } ?>
+      <!--= ======-->
             <form action="Controllers/MaterialRecebidoController.php?acao=cadastrar_interno" method="POST">
 
                 <div class="row mb-4">

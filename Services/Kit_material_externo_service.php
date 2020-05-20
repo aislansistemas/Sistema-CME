@@ -37,7 +37,7 @@
 		}	
 		////
 		public function buscaMaterialExterno($material,$tipobusca,$pagina,$limit){
-			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data, '%d/%m/%Y') as data_recebido FROM tb_kit_material_recebido_externo as kit inner JOIN tb_materiais_recebidos as mr on(kit.id_recebido = mr.id and ".$tipobusca." like :material and  kit.quantidade > 0 and kit.status = 'recebido' and kit.id_hospital= :id_hospital) ORDER by data_recebido desc limit ".$pagina.",".$limit."";
+			$query="select *,kit.id as id_kit,DATE_FORMAT(mr.data, '%d/%m/%Y') as data_recebido FROM tb_kit_material_recebido_externo as kit inner JOIN tb_materiais_recebidos as mr on(kit.id_recebido = mr.id and ".$tipobusca." like :material and  kit.status = 'recebido' and kit.id_hospital= :id_hospital) ORDER by data_recebido desc limit ".$pagina.",".$limit."";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':material','%'.$material.'%');
 			$stmt->bindValue(':id_hospital',$this->kit_mat_extern->__get('id_hospital'));
@@ -51,6 +51,14 @@
 			$stmt->bindValue(':id_hospital',$this->kit_mat_extern->__get('id_hospital'));
 			$stmt->execute();
 			return $stmt->fetch();
+		}
+
+		public function DeletarKitExterno(){
+			$query="delete from tb_kit_material_recebido_externo where id = :id and id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id_hospital',$this->kit_mat_extern->__get('id_hospital'));
+			$stmt->bindValue(':id',$this->kit_mat_extern->__get('id'));
+			$stmt->execute();
 		}
 		
 		

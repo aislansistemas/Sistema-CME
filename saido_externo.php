@@ -150,7 +150,7 @@
     </header>
 
     <section>
-        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary">Materiais externos liberados do Sistema</h4>
+        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary" id="titulo-pagina">Materiais externos liberados do Sistema</h4>
         
         <div class="container mb-5" id="cont">
       <!--= feedback de cadastro feito com sucesso=-->
@@ -160,6 +160,16 @@
               &times;
               </button>
               <span class="">Saída do material feita com sucesso!</span>
+            </div>
+        <?php } ?>
+      <!--= ======--> 
+      <!--= feedback de cadastro feito com sucesso=-->
+      <?php if(isset($_GET['deletado'])){ ?>
+            <div class="alert alert-success alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Material deletado com sucesso!</span>
             </div>
         <?php } ?>
       <!--= ======--> 
@@ -198,6 +208,9 @@
             <table class="table table-light table-striped table-hover text-secondary tabela-materiais table-bordered" id="tabela-materias">
               <thead class="text-light head-table">
                 <tr>
+      <?php if($_SESSION['perfil'] == 'admin'){ ?>
+                  <td scope="col">Delete</td>
+      <?php } ?>
                   <th scope="col">Id</th>
                   <th scope="col">Material</th>
                   <th scope="col">Quantidade</th>
@@ -213,6 +226,15 @@
 
         <?php foreach ($lista as $key => $dados){ ?>
                 <tr class="">
+
+        <?php if($_SESSION['perfil'] == 'admin') { ?>
+                    <td>
+                      <button onclick="deletaSaidoexterno(<?= $dados['id_mat'] ?>,<?= $_SESSION['id_hospital'] ?>,<?= $dados['id_kit_processado'] ?>)" class="btn btn-danger">
+                      <i class="far fa-times-circle"></i>
+                      </button>
+                    </td>
+        <?php } ?>
+
                     <td><?= $dados['id_mat'] ?></td>
                     <td><?= $dados['material'] ?></td> 
                     <td><?= $dados['quantidade'] ?></td>      
@@ -254,6 +276,7 @@
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script type="text/javascript" src="js/deletar_material.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

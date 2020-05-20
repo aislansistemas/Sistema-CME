@@ -11,11 +11,12 @@
 		}	
 		public function salvaKitSaidaExterno(){
 			$query="insert into tb_kit_material_saido_externo
-			(id_saida,id_hospital,material,quantidade)
-			values(:id_saida, :id_hospital, :material, :quantidade)";
+			(id_saida,id_hospital,id_kit_processado,material,quantidade)
+			values(:id_saida, :id_hospital, :id_kit_processado, :material, :quantidade)";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_saida',$this->kit_saido_externo->__get('id_saida'));
 			$stmt->bindValue(':id_hospital',$this->kit_saido_externo->__get('id_hospital'));
+			$stmt->bindValue(':id_kit_processado',$this->kit_saido_externo->__get('id_kit_processado'));
 			$stmt->bindValue(':material',$this->kit_saido_externo->__get('material'));
 			$stmt->bindValue(':quantidade',$this->kit_saido_externo->__get('quantidade'));
 			$stmt->execute();
@@ -44,6 +45,15 @@
 			$stmt->bindValue(':id_hospital',$this->kit_saido_externo->__get('id_hospital'));
 			$stmt->execute();
 			return $stmt->fetch();
-		}							
+		}	
+
+		public function DeleteSaidoExterno(){
+			$query="delete from tb_kit_material_saido_externo where id = :id and id_hospital = :id_hospital";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id',$this->kit_saido_externo->__get('id'));
+			$stmt->bindValue(':id_hospital',$this->kit_saido_externo->__get('id_hospital'));
+			$stmt->execute();
+		}
+
 	}
 ?>

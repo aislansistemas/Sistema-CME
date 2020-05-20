@@ -6,6 +6,7 @@
 		private $id_saida;
 		private $id_hospital;	
 		private $id_material;
+		private $id_kit_processado;
 		private $quantidade;
 
 		public function __get($atributo){

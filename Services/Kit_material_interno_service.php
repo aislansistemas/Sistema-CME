@@ -60,6 +60,14 @@
 			$stmt->execute();
 			return $stmt->fetch();
 		}
+
+		public function DeletarKitInterno(){
+			$query="delete from tb_kit_material_recebido_interno where id = :id and id_hospital = :id_hospital ";
+			$stmt=$this->conexao->prepare($query);
+			$stmt->bindValue(':id_hospital',$this->kit_mat_inter->__get('id_hospital'));
+			$stmt->bindValue(':id',$this->kit_mat_inter->__get('id'));
+			$stmt->execute();
+		}
 		
 	}
 ?>

@@ -22,10 +22,10 @@
 
 	if(isset($_GET['saido_interno'])){
 
+		foreach ($_SESSION['materiais_saida_enviados'] as $key => $dados) {
+			echo $dados['id_processado_material'];
+		}
 		$_SESSION['registroSaidaValores'] = $_POST;
-
-
-		
 		foreach ($_SESSION['materiais_saida_enviados'] as $key => $dados) {
 			$kit_proce = new Kit_Processado_Interno();
 			$kit_proce->__set('id_processado_material',$dados['id_processado_material']);
@@ -59,6 +59,7 @@
 			$kit_saida->__set('id_saida',$result['id']);
 			$kit_saida->__set('id_hospital',$_SESSION['id_hospital']);
 			$kit_saida->__set('id_material',$dados['id']);
+			$kit_saida->__set('id_kit_processado',$dados['id_processado_material']);
 			$kit_saida->__set('quantidade',$dados['qtd']);
 			$kit_saida_service = new Kit_saido_interno_service($kit_saida,$conexao);
 			$kit_saida_service->salvaKitSaidaInterno();
@@ -97,7 +98,6 @@
 		header('Location: ../saido_interno.php?cadastrado');
 	}else if(isset($_GET['saido_externo'])){
 
-		//var_dump($_POST);exit;
 		$conexao = new Conexao();
 		$mat_saida = new Saida_material();
 		$mat_saida->__set('id_hospital',$_SESSION['id_hospital']);
@@ -112,6 +112,7 @@
 			$kit_saida = new Kit_saido_externo();
 			$kit_saida->__set('id_saida',$result['id']);
 			$kit_saida->__set('id_hospital',$_SESSION['id_hospital']);
+			$kit_saida->__set('id_kit_processado',$dados['id_processado_material']);
 			$kit_saida->__set('material',$dados['nome']);
 			$kit_saida->__set('quantidade',$dados['qtd']);
 			$kit_saida_service = new Kit_saido_externo_service($kit_saida,$conexao);
@@ -119,12 +120,54 @@
 
 			$kit_proce = new Kit_Processado_externo();
 			$kit_proce->__set('id_processado_material',$dados['id_processado_material']);
+			$kit_proce->__set('id_hospital',$_SESSION['id_hospital']);
 			$kit_proce->__set('status',"finalizado");
 			$kit_proce_service = new Kit_proce_externo_service($kit_proce,$conexao);
 			$kit_proce_service->alterarKitProcessadoStatus();
 		}
 		unset($_SESSION['materiais_saida_enviados']);
 		header('Location: ../saido_externo.php?cadastrado');
+	}else if(isset($_GET['acao']) &&  $_GET['acao'] == 'deletar_saido_externo'){
+		print_r($_POST);
+
+		$kit_proce = new Kit_Processado_externo();
+		$kit_proce->__set('id_processado_material',$_POST['id_kit_processado']);
+		$kit_proce->__set('id_hospital',$_POST['id_hospital']);
+		$kit_proce->__set('status','processado');
+		$kit_proce_service = new Kit_proce_externo_service($kit_proce,$conexao);
+		$kit_proce_service->alterarKitProcessadoStatus();
+
+		$kit_saida = new Kit_saido_externo();
+		$kit_saida->__set('id',$_POST['id_saido']);
+		$kit_saida->__set('id_hospital',$_POST['id_hospital']);
+		$kit_saida_service = new Kit_saido_externo_service($kit_saida,$conexao);
+		$kit_saida_service->DeleteSaidoExterno();
+		header('Location: ../saido_externo.php?deletado');
+
+	}else if(isset($_GET['acao']) &&  $_GET['acao'] == 'deletar_saido_interno'){
+		print_r($_POST);
+
+		$kit_proce = new Kit_Processado_Interno();
+		$kit_proce->__set('status','processado');
+		$kit_proce->__set('id',$_POST['id_kit_processado']);
+		$kit_proce->__set('id_hospital',$_POST['id_hospital']);
+		$kit_proce_service = new Kit_proce_interno_service($kit_proce,$conexao);
+		$kit_proce_service->alterarKitProcessadoStatusDelecao();
+
+		$material = new Material();
+		$material->__set('id',$_POST['id_material']);
+		$material->__set('status_material','indisponivel');
+		$material->__set('id_hospital',$_POST['id_hospital']);
+		$material_service = new MaterialService($material,$conexao);
+		$material_service->editarStatus();
+
+		$kit_saida = new Kit_saido_interno();
+		$kit_saida->__set('id',$_POST['id_saido']);
+		$kit_saida->__set('id_hospital',$_POST['id_hospital']);
+		$kit_saida_service = new Kit_saido_interno_service($kit_saida,$conexao);
+		$kit_saida_service->DeleteSaidoInterno();
+		header('Location: ../saido_interno.php?deletado');	
+
 	}
 	
 ?>

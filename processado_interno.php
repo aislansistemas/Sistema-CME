@@ -145,7 +145,7 @@
     </header>
 
     <section>
-        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary">Registro Interno de Materiais processados</h4>
+        <h4 style="margin-top: 60px" class="text-center mb-4 text-primary" id="titulo-pagina">Registro Interno de Materiais processados</h4>
         
         <div id="msg-error"></div>
         <!--= ======-->
@@ -159,6 +159,16 @@
               <span class="">Materiais Processados com sucesso!</span>
             </div>
         <?php } ?>
+
+        <?php if(isset($_GET['deletado'])){ ?>
+            <div class="alert alert-success alert-dismissible text-center">
+              <button class="close" type="button" data-dismiss="alert">
+              &times;
+              </button>
+              <span class="">Material deletado com sucesso!</span>
+            </div>
+        <?php } ?>
+        
         <?php if(isset($_GET['tipobusca']) && $_GET['tipobusca'] == "0"){ ?>
             <div class="alert alert-danger alert-dismissible text-center">
               <button class="close" type="button" data-dismiss="alert">
@@ -208,6 +218,11 @@
               <thead class="text-light head-table">
                 <tr>
                   <th scope="col">Ação</th>
+
+          <?php if($_SESSION['perfil'] == 'admin'){ ?>
+                  <th scope="col">Deletar</th>
+          <?php } ?>
+
                   <th scope="col">Id</th>
                   <th scope="col">Material</th>
                   <th scope="col">Processado por</th>
@@ -226,6 +241,15 @@
         <?php foreach ($lista as $key => $dados){ ?>
                 <tr class="">
                   <td scope="col"><input class="form-control" type="checkbox" value="<?= $dados['id_material'] ?>, <?= $dados['quantidade'] ?>, <?= $dados['id_processando_material'] ?>" class="form-check-input" name="check-material-id"></td>
+                  
+        <?php if($_SESSION['perfil'] == 'admin'){ ?>
+                  <td>
+                    <button onclick="deletaProceinterno(<?= $dados['id_processando_material'] ?>,<?= $_SESSION['id_hospital'] ?>,<?= $dados['id_kit_recebido'] ?>)" class="btn btn-danger">
+                      <i class="far fa-times-circle"></i>
+                    </button>
+                  </td>
+        <?php } ?>
+
                   <td scope="col"><?= $dados['id_material'] ?></td>
                   <td scope="col"><?= $dados['descricao'] ?></td>
                   <td scope="col"><?= $dados['responsavel_por'] ?></td> 
@@ -349,5 +373,6 @@
       });
   });
 </script>
+<script type="text/javascript" src="js/deletar_material.js"></script>
 </body>
 </html>
