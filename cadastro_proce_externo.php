@@ -169,7 +169,7 @@
                 <input class="form-control" type="time" name="horario_134" required="">
               </div>
             </div>
-                <div class="row" id="tabela-materiais-adicionados" <?php if(!isset($_SESSION['materiais_enviados_externo'])){ echo 'style="display: none;"';}?>>
+                <div class="row" id="tabela-materiais-adicionados" <?php if(!isset($_SESSION['materiais_pre_processar_externo'])){ echo 'style="display: none;"';}?>>
                     <div class="col-md-12">
                         <label>Materiais Adicionados no Processamento</label>
                         <table class="table table-light" id="tabela-materias">
@@ -182,9 +182,9 @@
                             </thead>
                             <tbody>
 
-                            <?php if(isset($_SESSION['materiais_enviados_externo']) && count($_SESSION['materiais_enviados_externo']) > 0){ ?>
+                            <?php if(isset($_SESSION['materiais_pre_processar_externo']) && count($_SESSION['materiais_pre_processar_externo']) > 0){ ?>
 
-                            <?php foreach($_SESSION['materiais_enviados_externo'] as $key => $material){ ?>
+                            <?php foreach($_SESSION['materiais_pre_processar_externo'] as $key => $material){ ?>
 
                                 <tr data-id="<?php echo $material['id']; ?>">
                                     <td class="material-nome"><?php echo $material['nome']; ?></td>
@@ -192,7 +192,7 @@
                                     <td class="material-qt"><?php echo $material['qtd']; ?></td>
 
                                     <td>
-                                        <a class="btn btn-danger text-light" onclick="limparProcessados(<?= $key ?>,'<?= $material['nome'] ?>')"><i class="far fa-times-circle"></i></a>
+                                        <a class="btn btn-danger text-light" onclick="limpar_pre_processar_externo(<?= $key ?>,'<?= $material['nome'] ?>')"><i class="far fa-times-circle"></i></a>
                                     </td>
                                 </tr>
 

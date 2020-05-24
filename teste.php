@@ -1,11 +1,27 @@
 <?php
 	session_start();
-if(isset($_GET['acao_interno'])){
-	print_r($_SESSION['materiais_enviados']);
-	unset($_SESSION['materiais_enviados'][$_GET['key']]);
+if(isset($_GET['acao_interno_geral'])){
+	unset($_SESSION['materiais_enviados']);
 
+	}else if(isset($_GET['acao_pre_processar'])){
+		print_r($_SESSION['materiais_pre_processar']);
+		unset($_SESSION['materiais_pre_processar'][$_GET['key']]);
+	
+	}else if(isset($_GET['acao_pre_processar'])){
+		print_r($_SESSION['materiais_pre_processar']);
+		unset($_SESSION['materiais_pre_processar'][$_GET['key']]);
+	
+	}else if(isset($_GET['limpar_pre_processar_geral'])){
+		unset($_SESSION['materiais_pre_processar']);
+	
 	}else if(isset($_GET['acao_externo'])){
 		unset($_SESSION['materiais_enviados_externo'][$_GET['key']]);
+		
+	}else if(isset($_GET['acao_pre_processar_externo'])){
+		unset($_SESSION['materiais_pre_processar_externo'][$_GET['key']]);
+		
+	}else if(isset($_GET['acao_externo_geral'])){
+		unset($_SESSION['materiais_enviados_externo']);
 		
 	}else if(isset($_GET['acao_processados'])){
 		print_r($_SESSION['materiais_enviados']);

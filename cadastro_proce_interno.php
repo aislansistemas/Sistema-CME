@@ -173,7 +173,7 @@
                 <input class="form-control" type="time" name="horario_134" value="<?= $_SESSION['registroProcessadosValores']['horario_134'] ?>" required="">
               </div>
             </div>
-                <div class="row" id="tabela-materiais-adicionados" <?php if(!isset($_SESSION['materiais_enviados'])){ echo 'style="display: none;"';}?>>
+                <div class="row" id="tabela-materiais-adicionados" <?php if(!isset($_SESSION['materiais_pre_processar'])){ echo 'style="display: none;"';}?>>
                     <div class="col-md-12">
                         <label>Materiais Adicionados no Processamento</label>
                         <table class="table table-light" id="tabela-materias">
@@ -187,9 +187,9 @@
                             </thead>
                             <tbody>
 
-                            <?php if(isset($_SESSION['materiais_enviados']) && count($_SESSION['materiais_enviados']) > 0){ ?>
+                            <?php if(isset($_SESSION['materiais_pre_processar']) && count($_SESSION['materiais_pre_processar']) > 0){ ?>
 
-                            <?php foreach($_SESSION['materiais_enviados'] as $key =>$material){ ?>
+                            <?php foreach($_SESSION['materiais_pre_processar'] as $key =>$material){ ?>
 
                                 <tr data-id="<?php echo $material['id']; ?>">
                                     <td><?= $material['id'] ?></td>
@@ -197,7 +197,7 @@
                                                                      
                                     <td><input class="form-control" style="width: 200px" type="hidden" value="1"></td>
                                     <td>
-                                        <a class="btn btn-danger text-light" onclick="limpar(<?= $key ?>, <?= $material['id'] ?>)"><i class="far fa-times-circle"></i></a>
+                                        <a class="btn btn-danger text-light" onclick="limpar_pre_processar(<?= $key ?>, <?= $material['id'] ?>)"><i class="far fa-times-circle"></i></a>
                                     </td>
                                 </tr>
 
@@ -225,29 +225,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
-<script>/*
-function changeQtdMeterial(mterialId, posicao){
-
-  var qtdMeterial = document.getElementById("qtd-material-"+mterialId).value;
-
-   // Chamada em ajax pra enviar os dados e salvar na sessão:
-  $.ajax({
-    url: 'salva_material.php',
-    method: 'POST',
-    async: false,
-    data: {
-        id: mterialId,
-        qtd: qtdMeterial,
-        posicao: posicao,
-        local: 'cadastro_proce_interno'
-    },
-    dataType: 'json',
-    success: function(response){
-    }
-  });
-
-}*/
-</script>
 </body>
 </html>

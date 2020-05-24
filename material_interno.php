@@ -182,7 +182,7 @@
             <div class="container" style="background: rgba(150,150,150,0.2);border-radius: 8px 8px 0px 0px">
               <div class="row p-1 pt-2">
               <div class="col-md-6">
-                <a class="btn btn-primary mb-3 mr-3" style="text-decoration: none;color:white;font-weight: bold;" href="cadastrorecebidos_interno.php">
+                <a class="btn btn-primary mb-3 mr-3" onclick="limpar_recebido_geral()" style="text-decoration: none;color:white;font-weight: bold;" href="cadastrorecebidos_interno.php">
                     <i class="fas fa-plus"></i> NOVO
                 </a>
                 <button class="btn btn-success mb-3" id="add-button-proce"><i class="fas fa-layer-group"></i> PROCESSAR</button>
@@ -289,6 +289,7 @@
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script type="text/javascript" src="js/limpa_session.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
@@ -344,6 +345,7 @@
                 dataType: 'json',
                 success: function(response){
                   if(response.success === true){
+                    limpar_pre_processar_geral()
                     window.location.href = "cadastro_proce_interno.php"
                     return;
                   }else{

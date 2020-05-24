@@ -16,7 +16,18 @@ if(isset($_POST['material'], $_POST['local'])){
             array_push($dataArray, $data);
         }
 
-        $_SESSION['materiais_enviados_externo'] = $dataArray;
+        $_SESSION['materiais_pre_processar_externo'] = $dataArray;
+
+
+        if($_SESSION['materiais_pre_processar_externo'][0]['nome']){
+            echo json_encode(['success' => true]);
+            exit;
+
+        }else{
+            echo json_encode(['success' => false]);
+            exit;
+
+        }
 
     }else if($_POST['local'] == 'cadastrorecebidos_externo'){
 

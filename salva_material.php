@@ -26,7 +26,17 @@ if(isset($_POST['id'], $_POST['posicao'], $_POST['local'])){
             }
         }
 
-        $_SESSION['materiais_enviados'] = $dataArray;
+        $_SESSION['materiais_pre_processar'] = $dataArray;
+        
+        if($_SESSION['materiais_pre_processar'][0]['id'] > 0){
+            echo json_encode(['success' => true]);
+            exit;
+
+        }else{
+            echo json_encode(['success' => false]);
+            exit;
+
+        }
 
     }else if($_POST['local'] == 'cadastrorecebidos_interno'){
 

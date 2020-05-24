@@ -139,6 +139,7 @@ require_once "Services/MaterialService.php";
               <span class="">Erro! Por favor preencha os dados corretamente</span>
             </div>
         <?php } ?>
+        <div id="msg-error"></div>
       <!--= ======-->
             <form action="Controllers/MaterialRecebidoController.php?acao=cadastrar_interno" method="POST">
 
@@ -316,6 +317,23 @@ document.documentElement.onclick = function(event){
             var materialId = $('#material-id').val();
             var materialQtd = $('#material-qtd').val();
             // Chamada em ajax pra enviar os dados e salvar na sessão:
+
+            if(materialId == false){
+              var showError = document.getElementById("show-error");
+              var msgError = '';
+              if(Boolean(showError) == false){
+                msgError += '<div class="alert alert-danger alert-dismissible" id="show-error">'
+                msgError += '<button class="close" type="button" data-dismiss="alert">'
+                msgError += ' &times;'
+                msgError += '</button>'
+                msgError += '<span class="">Para adicionar material é necessário informa-lo!</span>'
+                msgError += '</div>'
+
+                $('#msg-error').append(msgError);
+              } 
+              return
+
+            }
 
             $.ajax({
                 url: 'salva_material.php',
