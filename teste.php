@@ -3,9 +3,8 @@
 if(isset($_GET['acao_interno_geral'])){
 	unset($_SESSION['materiais_enviados']);
 
-	}else if(isset($_GET['acao_pre_processar'])){
-		print_r($_SESSION['materiais_pre_processar']);
-		unset($_SESSION['materiais_pre_processar'][$_GET['key']]);
+	}else if(isset($_GET['acao_interno'])){
+		unset($_SESSION['materiais_enviados'][$_GET['key']]);
 	
 	}else if(isset($_GET['acao_pre_processar'])){
 		print_r($_SESSION['materiais_pre_processar']);
