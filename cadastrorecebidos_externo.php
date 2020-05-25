@@ -269,7 +269,7 @@
 
             // Chamada em ajax pra enviar os dados e salvar na sessão:
           if(materialQtd != '0'){
-
+            document.getElementById("add-button").disabled = true;
             $.ajax({
                 url: 'salva_material_externo.php',
                 method: 'POST',
@@ -306,6 +306,8 @@
 
                     $('#material-nome').val('');
                     $('#material-qtd').val('');
+                    document.getElementById("add-button").disabled = false;
+
                 }
 
             });//
