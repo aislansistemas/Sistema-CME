@@ -232,6 +232,7 @@
     $(document).ready(function(){
         $('#add-button').click(function(e){
             e.preventDefault();
+            document.getElementById("add-button").disabled = true;
 
             var materialnome = $('#material-nome').val();
             var materialQtd = $('#material-qtd').val();
@@ -249,6 +250,7 @@
 
                 $('#msg-error').append(msgError);
               } 
+              document.getElementById("add-button").disabled = false;
               return
             }
             if(materialQtd == false){
@@ -264,12 +266,12 @@
 
                 $('#msg-error').append(msgError);
               } 
+              document.getElementById("add-button").disabled = false;
               return
             }
 
             // Chamada em ajax pra enviar os dados e salvar na sessão:
           if(materialQtd != '0'){
-            document.getElementById("add-button").disabled = true;
             $.ajax({
                 url: 'salva_material_externo.php',
                 method: 'POST',
@@ -313,6 +315,7 @@
             });//
           }else{
             console.log('erro')
+            document.getElementById("add-button").disabled = false;
               document.getElementById('aa').style.display='block'
               var texto =document.getElementById('erro').innerHTML='Por favor insira quantidades maiores que 0'
           }
