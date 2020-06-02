@@ -34,7 +34,7 @@
 						$_SESSION['perfil'] = $retorno[0]['perfil'];
 						print_r($_SESSION);
 						header('Location: ../home.php');
-					}else if(count($retorno) == 2 && count($retorno) > 0){
+					}else if(count($retorno) >= 2 && count($retorno) > 0){
 						$_SESSION['email'] = $retorno[0]['email'];
 						$_SESSION['senha'] = $retorno[0]['senha'];
 						

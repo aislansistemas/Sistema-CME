@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.65d2bed7.chunk.css",
+    "main.js": "/static/js/main.57b3be52.chunk.js",
+    "main.js.map": "/static/js/main.57b3be52.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1c2d59f4.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1c2d59f4.js.map",
+    "static/css/2.b54c2ebb.chunk.css": "/static/css/2.b54c2ebb.chunk.css",
+    "static/js/2.2e6b0fdf.chunk.js": "/static/js/2.2e6b0fdf.chunk.js",
+    "static/js/2.2e6b0fdf.chunk.js.map": "/static/js/2.2e6b0fdf.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e573fbba45c8331315a486fab2f01aec.js": "/precache-manifest.e573fbba45c8331315a486fab2f01aec.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.b54c2ebb.chunk.css.map": "/static/css/2.b54c2ebb.chunk.css.map",
+    "static/css/main.65d2bed7.chunk.css.map": "/static/css/main.65d2bed7.chunk.css.map",
+    "static/js/2.2e6b0fdf.chunk.js.LICENSE": "/static/js/2.2e6b0fdf.chunk.js.LICENSE",
+    "static/media/style.css": "/static/media/bebas-neue-book.0b9bf3db.otf",
+    "static/media/Place Kids-2.jpg": "/static/media/Place Kids-2.2dea9f42.jpg",
+    "static/media/Place Kids-3.jpg": "/static/media/Place Kids-3.dc5bd391.jpg",
+    "static/media/Place Kids-4.jpg": "/static/media/Place Kids-4.c3f02890.jpg",
+    "static/media/Place Kids-5.jpg": "/static/media/Place Kids-5.1f2312a6.jpg",
+    "static/media/Place Kids-6.jpg": "/static/media/Place Kids-6.2fb247a3.jpg",
+    "static/media/ballet_new.png": "/static/media/ballet_new.952fb5e6.png",
+    "static/media/ftd.png": "/static/media/ftd.e820399d.png",
+    "static/media/ingles.png": "/static/media/ingles.b93cf996.png",
+    "static/media/instagram.png": "/static/media/instagram.0576ef1f.png",
+    "static/media/karate.png": "/static/media/karate.71da5287.png",
+    "static/media/mini_logo.png": "/static/media/mini_logo.9127c658.png",
+    "static/media/musica.png": "/static/media/musica.a52d6676.png",
+    "static/media/nutrico.png": "/static/media/nutrico.72936591.png",
+    "static/media/playkids-1.png": "/static/media/playkids-1.77f7c4d2.png",
+    "static/media/playkids-2.png": "/static/media/playkids-2.087a0f07.png",
+    "static/media/playkids-3.png": "/static/media/playkids-3.d5be5b6e.png",
+    "static/media/whats.png": "/static/media/whats.d87d71e4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1c2d59f4.js",
+    "static/css/2.b54c2ebb.chunk.css",
+    "static/js/2.2e6b0fdf.chunk.js",
+    "static/css/main.65d2bed7.chunk.css",
+    "static/js/main.57b3be52.chunk.js"
+  ]
+}

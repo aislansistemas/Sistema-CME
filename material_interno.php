@@ -369,6 +369,6 @@
     });
 
   </script>
-  <script type="text/javascript" src="js/deletar_material.js"></script>
+  
 </body>
 </html>

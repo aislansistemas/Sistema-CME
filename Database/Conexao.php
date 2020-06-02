@@ -20,7 +20,7 @@ class Conexao
     /**
      * @var string
      */
-    private $pass = 'root';
+    private $pass = '';
 
     /**
      * Cria uma nova conexão com o BD:

@@ -174,15 +174,9 @@
                   <td scope="col">Usuario <?= $dados['perfil'] ?></td> 
                   <td scope="col"><?= ucfirst($dados['situacao']) ?></td> 
 
-          <?php if($dados['perfil'] != 'admin'){ ?>
                   <td scope="col">
                     <a class="btn btn-primary" href="edit_perfil_usuario.php?id=<?= $dados['id'] ?>&nome=<?= $dados['nome'] ?>&perfil=<?= $dados['perfil'] ?>"><i class="far fa-edit"></i></a>
                   </td>
-          <?php }else{ ?>
-                   <td scope="col">
-                    
-                   </td>
-          <?php } ?>
 
                   <td scope="col">
           <?php if($_SESSION['perfil'] == 'admin'){ ?>          

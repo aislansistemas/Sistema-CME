@@ -116,11 +116,11 @@
 		$mat_service = new Kit_mat_inter_service($mat_recebido,$conexao);
 		$mat_service->DeletarKitInterno();
 
-		$mat_recebido1 = new MaterialRecebido();
+		/*$mat_recebido1 = new MaterialRecebido();
 		$mat_recebido1->__set('id_hospital',$_POST['id_hospital']);
 		$mat_recebido1->__set('id',$_POST['id_recebido']);
 		$mat_service1 = new MaterialRecebidoService($mat_recebido1,$conexao);
-		$mat_service1->DeletaMaterialrecebido();
+		$mat_service1->DeletaMaterialrecebido();*/
 
 		$material = new Material();
 		$material->__set('id',$_POST['id_material']);
@@ -141,11 +141,11 @@
 		$kit_externo_service = new Kit_mat_extern_service($kit_externo,$conexao);
 		$kit_externo_service->DeletarKitExterno();
 
-		$mat_recebido1 = new MaterialRecebido();
+		/*$mat_recebido1 = new MaterialRecebido();
 		$mat_recebido1->__set('id_hospital',$_POST['id_hospital']);
 		$mat_recebido1->__set('id',$_POST['id_recebido']);
 		$mat_service1 = new MaterialRecebidoService($mat_recebido1,$conexao);
-		$mat_service1->DeletaMaterialrecebido();
+		$mat_service1->DeletaMaterialrecebido();*/
 		header('Location: ../material_externo.php?deletado');
 	}
 

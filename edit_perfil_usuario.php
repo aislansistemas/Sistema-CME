@@ -126,9 +126,14 @@
               
               <label for="perfil">Perfil de Usuario</label>
               <select class="form-control" name="perfil" id="perfil" required="">
-                <option value="<?= $_GET['perfil'] ?>">Usuario <?= ucfirst($_GET['perfil']) ?></option>
-                <option value="comum">Usuario Comum</option>
+
+      <?php if($_GET['perfil'] == 'comum'){ ?>
+              <option value="comum">Usuario Comum</option>
+              <option value="admin">Usuario Admin</option>
+      <?php }else{ ?>          
                 <option value="admin">Usuario Admin</option>
+                <option value="comum">Usuario Comum</option>
+      <?php } ?>          
               </select>
 
               	<button class="btn btn-primary mt-4 mb-5">ATUALIZAR</button>
