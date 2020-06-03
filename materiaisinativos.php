@@ -8,17 +8,13 @@
     require_once "Services/MaterialService.php";
 
 
-    if(isset($_GET['pagina'])){
-      $pagina=$_GET['pagina'];     
-    }else{
-      $pagina=0;
-    }
-    $limit=20;
+    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    $limit = 20;
     $conexao = new Conexao();
     $material = new Material();
     $material->__set('id_hospital',$_SESSION['id_hospital']);
     $material_service = new MaterialService($material,$conexao);
-    $lista = $material_service->listarMateriasInativos($pagina,$limit);
+    $lista = $material_service->listarMateriasInativos(($pagina - 1)*$pagina,$limit);
     $total=$material_service->totalMateriaisInativos();
     $qtdPag = ceil($total['total']/$limit);
 ?>
@@ -166,24 +162,20 @@
               </tbody>
             </table>
              <div class="container p-2 pt-3 pb-2" id="div-table-bottom">
-                <!----- links de paginação ------->
-                
-                <a class="btn btn-secondary btn-sm ml-2" href="materiaisinativos.php?pagina=0">PRIMEIRA</a>
-                <?php 
-                 if($qtdPag > 1 && $pagina<= $qtdPag){ 
-                   for($i=1; $i <= $qtdPag; $i++){ 
-                        
-                       if($i == $pagina){
-                            
-                           echo $i;
-                       }else{
-                 ?>    
-                  <a class="btn btn-secondary btn-sm" href="materiaisinativos.php?pagina=<?= $i ?>"> <?= $i ?></a>
-              <?php       }
-                  }
-           
-                 } ?>
-                <a class="btn btn-secondary btn-sm" href="materiaisinativos.php?pagina=<?= $qtdPag ?>">ÚLTIMA</a> 
+                 <!----- links de paginação ------->
+            <?php
+                  if ($qtdPag > 1 && $pagina <= $qtdPag) {
+                      for ($i = 1; $i <= $qtdPag; $i++) {
+
+                        if ($i == $pagina) {
+
+                             echo $i;
+                        } else {
+                        ?>
+                         <a class="btn btn-outline-secondary btn-sm" href="materiaisativos.php?pagina=<?= $i ?>"> <?= $i ?></a>
+           <?php       }
+                            }
+                    } ?> 
               <!------- fim do bloco de paginação -------->
               </div>
            </div>

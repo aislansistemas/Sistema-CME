@@ -7,12 +7,8 @@
   require 'Models/Kit_saido_interno.php';
   require 'Services/Kit_saido_interno_service.php';
 
-  if(isset($_GET['pagina'])){
-    $pagina=$_GET['pagina'];     
-  }else{
-    $pagina=0;
-  }
-  $limit=20;
+  $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+  $limit = 20;
   $conexao = new Conexao();
   $kit_interno = new Kit_saido_interno();
   if(isset($_GET['data_1']) && $_GET['data_1'] != null 
@@ -22,7 +18,7 @@
     ////
     $kit_interno->__set('id_hospital',$_SESSION['id_hospital']);
     $kit_interno_service = new Kit_saido_interno_service($kit_interno,$conexao);
-    $lista=$kit_interno_service->buscaMaterialSaidaInterno($data1,$data2,$pagina,$limit);
+    $lista=$kit_interno_service->buscaMaterialSaidaInterno($data1,$data2,($pagina - 1)*$pagina,$limit);
     $total=$kit_interno_service->totalMateriaisSaidaInternos();
     $qtdPag = ceil($total['total']/$limit);
 
@@ -31,7 +27,7 @@
     ///
     $kit_interno->__set('id_hospital',$_SESSION['id_hospital']);
     $kit_interno_service = new Kit_saido_interno_service($kit_interno,$conexao);
-    $lista=$kit_interno_service->listaKitSaidaInterno($pagina,$limit);
+    $lista=$kit_interno_service->listaKitSaidaInterno(($pagina - 1)*$pagina,$limit);
     $total=$kit_interno_service->totalMateriaisSaidaInternos();
     $qtdPag = ceil($total['total']/$limit);
     ///
@@ -248,22 +244,19 @@
             </table>
             <div class="container p-2 pt-3 pb-2" id="div-table-bottom">
               <!----- links de paginação ------->
-            <a class="btn btn-secondary btn-sm ml-2" href="saido_interno.php?pagina=0">PRIMEIRA</a>
-            <?php 
-               if($qtdPag > 1 && $pagina<= $qtdPag){ 
-                for($i=1; $i <= $qtdPag; $i++){ 
-              
-                if($i == $pagina){
-                  
-                 echo $i;
-                }else{
-             ?>    
-               <a class="btn btn-secondary btn-sm" href="saido_interno.php?pagina=<?= $i ?>"> <?= $i ?></a>
-              <?php       }
-              }
- 
-              } ?>
-              <a class="btn btn-secondary btn-sm" href="saido_interno.php?pagina=<?= $qtdPag ?>">ÚLTIMA</a> 
+            <?php
+                  if ($qtdPag > 1 && $pagina <= $qtdPag) {
+                      for ($i = 1; $i <= $qtdPag; $i++) {
+
+                        if ($i == $pagina) {
+
+                             echo $i;
+                        } else {
+                        ?>
+                         <a class="btn btn-outline-secondary btn-sm" href="saido_interno.php?pagina=<?= $i ?>"> <?= $i ?></a>
+           <?php       }
+                            }
+                    } ?> 
               <!------- fim do bloco de paginação -------->
              </div>
            </div>

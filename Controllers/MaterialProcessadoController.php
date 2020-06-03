@@ -19,8 +19,7 @@
 	if(isset($_GET['acao']) && $_GET['acao'] == 'cadastro_interno'){
 	
 		$_SESSION['registroProcessadosValores'] = $_POST;
-		print_r($_SESSION['materiais_enviados']);
-			foreach ($_SESSION['materiais_enviados'] as $key => $dados) {
+			foreach ($_SESSION['materiais_pre_processar'] as $key => $dados) {
 			$kit_recebido = new Kit_Material_interno();
 			$kit_recebido->__set('id_hospital',$_SESSION['id_hospital']);
 			$kit_recebido->__set('id',$dados['id_recebido_material']);
@@ -47,7 +46,7 @@
 		$mat_proce_service = new MaterialProcessadoService($mat_proce,$conexao);
 		$mat_proce_service->registroProcessados();
 		$result=$mat_proce_service->obterUltimoCadastro();
-		foreach ($_SESSION['materiais_enviados'] as $key => $dados) {
+		foreach ($_SESSION['materiais_pre_processar'] as $key => $dados) {
 			$kit_proce = new Kit_Processado_Interno();
 			$kit_proce->__set('id_processado',$result['id']);
 			$kit_proce->__set('id_hospital',$_SESSION['id_hospital']);
@@ -74,13 +73,12 @@
 				$kit_recebido_alterar_service->alterarQtdKitInterno();
 			}
 		}
-		unset($_SESSION['materiais_enviados']);
+		unset($_SESSION['materiais_pre_processar']);
 		unset($_SESSION['registroProcessadosValores']);
 		unset($_SESSION['erroProcessadosQtd']);
 		header('Location: ../processado_interno.php?cadastrado');
 
 	}else if(isset($_GET['acao']) && $_GET['acao'] == 'cadastro_externo'){
-
 		
 		$mat_proce = new MaterialProcessado();
 		$mat_proce->__set('id_hospital',$_SESSION['id_hospital']);
@@ -95,7 +93,7 @@
 		$mat_proce_service = new MaterialProcessadoService($mat_proce,$conexao);
 		$mat_proce_service->registroProcessados();
 		$result=$mat_proce_service->obterUltimoCadastro();
-		foreach ($_SESSION['materiais_enviados_externo'] as $key => $dados) {
+		foreach ($_SESSION['materiais_pre_processar_externo'] as $key => $dados) {
 			$kit_proce = new Kit_Processado_externo();
 			$kit_proce->__set('id_processado',$result['id']);
 			$kit_proce->__set('id_hospital',$_SESSION['id_hospital']);
@@ -115,7 +113,7 @@
 			$kit_recebido_alterar_service->alterarQtdKitExterno();
 			
 		}
-		unset($_SESSION['materiais_enviados_externo']);
+		unset($_SESSION['materiais_pre_processar_externo']);
 		header('Location: ../processado_externo.php?cadastrado');
 
 	}else if(isset($_GET['acao']) && $_GET['acao'] == 'deletar_processado_interno'){

@@ -235,7 +235,7 @@
           <div class="item item3">
             <div class="paragrafo">
               <h4 class="pl-2"><?= $total_usuarios['total_usuarios'] ?></h4>
-              <p class="pl-2 pr-2">Usuarios cadastrados <spam style="color:rgba(231, 30, 49, 0.8);">++++</spam></p>
+              <p class="pl-2 pr-2">Usuarios cadastrados <spam style="color:rgba(231, 30, 49, 0.8);">++++++</spam></p>
               <a style="text-decoration: none" href="usuarios.php">
               <div class="div-visualiza">
                  Ver <i class="fas fa-arrow-alt-circle-right"></i>
@@ -248,7 +248,7 @@
           <div class="item item3">
             <div class="paragrafo">
               <h4 class="pl-2">+</h4>
-              <p class="pl-2 pr-2">Cadastrar Novo Usuario <spam style="color:rgba(231, 30, 49, 0.8);">++++</spam></p>
+              <p class="pl-2 pr-2">Cadastrar Novo Usuario <spam style="color:rgba(231, 30, 49, 0.8);">++++++</spam></p>
               <a style="text-decoration: none" href="cad_usuario.php">
               <div class="div-visualiza">
                  Novo <i class="fas fa-plus"></i>
