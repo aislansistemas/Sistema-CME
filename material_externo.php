@@ -182,16 +182,17 @@
                 <form action="material_externo.php" method="GET">
                   <div class="form-row">
                     <div class="input-group col-md-6">
-                      <select name="tipobusca" class="form-control mb-2" id="FormControlSelectTypeSearch">
+                      <select name="tipobusca" class="form-control mb-2" id="FormControlSelectTypeSearch" onchange="trocatipoRecebidoExterno()">
                         <option value="0" hidden>Selecione método busca</option>
                         <option value="kit.material">Material</option>
                         <option value="mr.quem_entregou">Quem entregou</option>
                         <option value="mr.quem_recebeu">Quem recebeu</option>
                         <option value="mr.quem_lavou">Quem lavou</option>
+                        <option value="mr.data">Data</option>
                       </select>
                     </div>
                     <div class="input-group col-md-6">
-                      <input class="form-control" type="text" name="busca" placeholder="Pesquisar...">
+                      <input class="form-control" type="text" name="busca" placeholder="Pesquisar..." id="input-busca">
                     <div class="input-group-prepend">
                       <button style="border-radius: 0px 5px 5px 0px" class="btn btn-primary mb-2" type="submit">
                         <i class="fas fa-search"></i>

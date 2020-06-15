@@ -100,13 +100,15 @@ function limparSaidaExterno(key,id){
 }
 
 function limparExterno(key){
+	
 	let ajax=new XMLHttpRequest();
 
 	ajax.open('GET', 'teste.php?acao_externo&key='+key);
 
 	ajax.onreadystatechange=()=>{
 	if(ajax.readyState==4 && ajax.status==200){
-				window.location.reload()
+			window.location.reload();
+			
 		}
 		if(ajax.readyState==4 && ajax.status==404){
 					
@@ -166,4 +168,36 @@ function limpar_pre_processar_externo(key,nome){
 		}
 	ajax.send();
 	//console.log(ajax);
+}
+
+function trocatipoProcessadoInterno(){
+	if(document.getElementById('FormControlSelectTypeSearch').value == 'c.data'){
+		document.getElementById('input-busca').type="date"
+	}else{
+		document.getElementById('input-busca').type="text"
+	}
+}
+
+function trocatipoProcessadoExterno(){
+	if(document.getElementById('FormControlSelectTypeSearch').value == 'b.data'){
+		document.getElementById('input-busca').type="date"
+	}else{
+		document.getElementById('input-busca').type="text"
+	}
+}
+
+function trocatipoRecebidoInterno(){
+	if(document.getElementById('FormControlSelectTypeSearch').value == 'mr.data'){
+		document.getElementById('input-busca').type="date"
+	}else{
+		document.getElementById('input-busca').type="text"
+	}
+}
+
+function trocatipoRecebidoExterno(){
+	if(document.getElementById('FormControlSelectTypeSearch').value == 'mr.data'){
+		document.getElementById('input-busca').type="date"
+	}else{
+		document.getElementById('input-busca').type="text"
+	}
 }

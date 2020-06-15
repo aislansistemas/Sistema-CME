@@ -12,6 +12,7 @@ if(isset($_POST['material'], $_POST['local'])){
             $data['qtd'] = (int) $value['qtd'];
             $data['nome'] = $value['nome'];
             $data['id_recebido_material'] = $value['id_recebido_material'];
+            
 
             array_push($dataArray, $data);
         }
@@ -33,6 +34,8 @@ if(isset($_POST['material'], $_POST['local'])){
 
         $data['nome'] = $_POST['material'];
         $data['qtd'] = $_POST['qtd'];
+        $_SESSION['recebido_externo_1_entregue'] = $_POST['entregue'];
+        $_SESSION['recebido_externo_1_lavado'] = $_POST['lavado'];
 
         array_push($dataArray, $data);
 

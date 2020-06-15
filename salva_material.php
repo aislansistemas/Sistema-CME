@@ -40,6 +40,9 @@ if(isset($_POST['id'], $_POST['posicao'], $_POST['local'])){
 
     }else if($_POST['local'] == 'cadastrorecebidos_interno'){
 
+        $_SESSION['recebido_interno1_entregue'] = $_POST['entregue'];
+        $_SESSION['recebido_interno1_lavado'] = $_POST['lavado'];
+
         // Verificar se existe o material no banco de dados:
         $material = $materialService->getById((int) $_POST['id']);
 

@@ -144,18 +144,33 @@ require_once "Services/MaterialService.php";
             <form action="Controllers/MaterialRecebidoController.php?acao=cadastrar_interno" method="POST">
 
                 <div class="row mb-4">
-                    <div class="col-md-4">                
+                    <div class="col-md-4">    
+
+      <?php if(isset($_SESSION['recebido_interno1_entregue'])){ ?>
                         <label class="text-dark">Entregue por:</label>
                         <input class="form-control mb-1" type="text" name="quem_entregou" required=""
-                               placeholder="Nome">
+                               placeholder="Nome" id="entregue" value="<?= $_SESSION['recebido_interno1_entregue'] ?>">
+      <?php }else{ ?> 
+                        <label class="text-dark">Entregue por:</label>
+                        <input class="form-control mb-1" type="text" name="quem_entregou" required=""
+                               placeholder="Nome" id="entregue">
+      <?php } ?>                        
+
                     </div>
                     <div class="col-md-4">
                         <label class="text-dark">Recebido por:</label>
                         <input class="form-control" type="text" name="quem_recebeu" placeholder="Nome" value="<?= $_SESSION['nome'] ?>" readonly="">
                     </div>
                     <div class="col-md-4">
+
+      <?php if(isset($_SESSION['recebido_interno1_lavado'])){ ?>                
                         <label class="text-dark">Lavado por:</label>
-                        <input class="form-control" type="text" name="quem_lavou" placeholder="Nome">
+                        <input class="form-control" type="text" name="quem_lavou" placeholder="Nome" id="lavado" value="<?= $_SESSION['recebido_interno1_lavado'] ?>">
+      <?php }else{ ?>
+                        <label class="text-dark">Lavado por:</label>
+                        <input class="form-control" type="text" name="quem_lavou" placeholder="Nome" id="lavado">
+      <?php } ?>
+
                     </div>
 
                 </div>
@@ -316,6 +331,8 @@ document.documentElement.onclick = function(event){
 
             var materialId = $('#material-id').val();
             var materialQtd = $('#material-qtd').val();
+            var entregue = document.getElementById('entregue').value
+            var lavado = document.getElementById('lavado').value;
             // Chamada em ajax pra enviar os dados e salvar na sessão:
 
             if(materialId == false){
@@ -342,6 +359,8 @@ document.documentElement.onclick = function(event){
                 data: {
                     id: materialId,
                     qtd: materialQtd,
+                    entregue: entregue,
+                    lavado: lavado,
                     local: 'cadastrorecebidos_interno',
                     posicao: 'null'
                 },

@@ -15,6 +15,7 @@
     $kit_interno = new Kit_Material_interno();
     if(isset($_GET['busca'], $_GET['tipobusca']) && $_GET['busca'] != null && $_GET['tipobusca'] != "0"){
       $material=$_GET['busca'];
+
       $tipobusca=$_GET['tipobusca'];
 
       $kit_interno->__set('id_hospital',$_SESSION['id_hospital']);
@@ -185,20 +186,26 @@
                 <button class="btn btn-success mb-3" id="add-button-proce"><i class="fas fa-layer-group"></i> PROCESSAR</button>
                 <a href="gera_pdf.php?receb_interno" class="btn btn-danger ml-3 mb-3 text-light">RELATÓRIO</a>
               </div>
+
+
               <div class="col-md-6">
+
                 <form action="material_interno.php" method="GET">
                   <div class="form-row">
                     <div class="input-group col-md-6">
-                      <select name="tipobusca" class="form-control mb-2" id="FormControlSelectTypeSearch">
+                      <select name="tipobusca" class="form-control mb-2" id="FormControlSelectTypeSearch" onchange="trocatipoRecebidoInterno()">
                         <option value="0" hidden>Selecione método busca</option>
                         <option value="m.descricao">Material</option>
                         <option value="mr.quem_entregou">Quem entregou</option>
                         <option value="mr.quem_recebeu">Quem recebeu</option>
                         <option value="mr.quem_lavou">Quem lavou</option>
+                        <option value="mr.data">Data</option>
                       </select>
                     </div>
                     <div class="input-group col-md-6">
-                      <input class="form-control" type="text" name="busca" placeholder="Pesquisar...">
+
+                      <input class="form-control" type="text" name="busca" placeholder="Pesquisar..." id="input-busca">
+
                     <div class="input-group-prepend">
                       <button style="border-radius: 0px 5px 5px 0px" class="btn btn-primary mb-2" type="submit">
                         <i class="fas fa-search"></i>
@@ -209,6 +216,7 @@
                 </form> 
 
               </div>
+
             </div>
             </div>
 
@@ -284,6 +292,7 @@
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
     <script type="text/javascript" src="js/limpa_session.js"></script>
+    <script type="text/javascript" src="js/deletar_material.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

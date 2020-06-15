@@ -48,6 +48,8 @@
 			$material_service->editarStatus();
 		}
 		unset($_SESSION['materiais_enviados']);
+		unset($_SESSION['recebido_interno1_entregue']);
+		unset($_SESSION['recebido_interno1_lavado']);
 		header('Location: ../material_interno.php?cadastrado');
 		}else{
 			header('Location: ../cadastrorecebidos_interno.php?erro');
@@ -80,6 +82,8 @@
 			$kit_externo_service->salvaKitExterno();
 		}
 		unset($_SESSION['materiais_enviados_externo']);
+		unset($_SESSION['recebido_externo_1_entregue']);
+		unset($_SESSION['recebido_externo_1_lavado']);
 		header('Location: ../material_externo.php?cadastrado');
 		}else{
 			header('Location: ../cadastrorecebidos_externo.php?erro');

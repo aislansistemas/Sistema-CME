@@ -187,17 +187,18 @@
                 <form action="processado_externo.php" method="GET">
                   <div class="form-row">
                     <div class="input-group col-md-6">
-                      <select name="tipobusca" class="form-control mb-2" id="FormControlSelectTypeSearch">
+                      <select name="tipobusca" class="form-control mb-2" id="FormControlSelectTypeSearch" onchange="trocatipoProcessadoExterno()">
                         <option value="0" hidden>Selecione método busca</option>
                         <option value="a.material">Material</option>
                         <option value="b.lote">Lote</option>
                         <option value="b.numero_do_ciclo">Número do ciclo</option>
                         <option value="b.pressao">Pressão</option>
                         <option value="b.temperatura_interna">Temperatura</option>
+                        <option value="b.data">Data</option>
                       </select>
                     </div>
                     <div class="input-group col-md-6">
-                      <input class="form-control" type="text" name="busca" placeholder="Pesquisar...">
+                      <input class="form-control" type="text" name="busca" placeholder="Pesquisar..." id="input-busca">
                     <div class="input-group-prepend">
                       <button style="border-radius: 0px 5px 5px 0px" class="btn btn-primary mb-2" type="submit">
                         <i class="fas fa-search"></i>
@@ -291,6 +292,7 @@
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script type="text/javascript" src="js/limpa_session.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

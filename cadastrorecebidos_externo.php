@@ -3,7 +3,7 @@
     if(!isset($_SESSION) || $_SESSION == null){
     header('Location: index.php');
     }
-    $id=1;
+    $id=1;   
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -135,16 +135,32 @@
 
           <div class="row mb-4">
             <div class="col-md-4">
+
+
+    <?php if(isset($_SESSION['recebido_externo_1_entregue'])){ ?>              
               <label class="text-dark">Entregue por:</label>
-              <input class="form-control mb-1" type="text" name="quem_entregou" required="" placeholder="Nome">
+              <input class="form-control mb-1" type="text" name="quem_entregou" required="" id="quem_entregou" placeholder="Nome" value="<?= $_SESSION['recebido_externo_1_entregue'] ?>">
+    <?php }else{ ?>  
+              <label class="text-dark">Entregue por:</label>
+              <input class="form-control mb-1" type="text" name="quem_entregou" required="" id="quem_entregou" placeholder="Nome">
+    <?php } ?>        
+
             </div>
             <div class="col-md-4">
               <label class="text-dark">Recebido por:</label>
               <input class="form-control" type="text" name="quem_recebeu" placeholder="Nome" value="<?= $_SESSION['nome'] ?>" readonly="">
             </div>
             <div class="col-md-4">
+
+  <?php if(isset($_SESSION['recebido_externo_1_lavado'])){ ?>
+
               <label class="text-dark">Lavado por:</label>
-              <input class="form-control" type="text" name="quem_lavou" placeholder="Nome">
+              <input class="form-control" type="text" name="quem_lavou" id="quem_lavou" placeholder="Nome" value="<?= $_SESSION['recebido_externo_1_lavado'] ?>">
+  <?php }else{ ?> 
+              <label class="text-dark">Lavado por:</label>
+              <input class="form-control" type="text" name="quem_lavou" id="quem_lavou" placeholder="Nome">
+  <?php } ?>  
+
             </div>
           </div>  
         <!--------------------------->
@@ -236,6 +252,8 @@
 
             var materialnome = $('#material-nome').val();
             var materialQtd = $('#material-qtd').val();
+            var entregue = document.getElementById('quem_entregou').value
+            var lavado = document.getElementById('quem_lavou').value;
 
             if(materialnome == false){
               var showError = document.getElementById("show-error");
@@ -275,10 +293,12 @@
             $.ajax({
                 url: 'salva_material_externo.php',
                 method: 'POST',
-                async: false,
+                async: true,
                 data: {
                     material: materialnome,
                     qtd: materialQtd,
+                    entregue : entregue,
+                    lavado : lavado,
                     local: 'cadastrorecebidos_externo'
                 },
                 dataType: 'json',
@@ -303,6 +323,7 @@
                     $('#tabela-materias tbody').append(linha);
                 
                     $('#tabela-materiais-adicionados').show();
+
 
                     // Reset inputs:
 
