@@ -47,6 +47,7 @@
 					$usuario->__set('email',$_POST['email']);
 					$usuario->__set('senha',$_POST['senha']);
 					$usuario->__set('perfil',"admin");
+					$usuario->__set('situacao',"ativo");
 					$usuario_service = new UsuarioService($usuario,$conexao);
 					$usuario_service->CadastrarUsuarioAdmin();
 					echo $lastId['id'];

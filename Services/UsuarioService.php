@@ -73,14 +73,15 @@
 		}
 
 		public function CadastrarUsuarioAdmin(){
-			$query="insert into tb_usuarios(id_hospital,nome,email,senha,perfil)
-			values(:id_hospital, :nome, :email, :senha, :perfil)";
+			$query="insert into tb_usuarios(id_hospital,nome,email,senha,perfil,situacao)
+			values(:id_hospital, :nome, :email, :senha, :perfil, :situacao)";
 			$stmt=$this->conexao->prepare($query);
 			$stmt->bindValue(':id_hospital',$this->usuario->__get('id_hospital'));
 			$stmt->bindValue(':nome',$this->usuario->__get('nome'));
 			$stmt->bindValue(':email',$this->usuario->__get('email'));
 			$stmt->bindValue(':senha',$this->usuario->__get('senha'));
 			$stmt->bindValue(':perfil',$this->usuario->__get('perfil'));
+			$stmt->bindValue(':situacao',$this->usuario->__get('situacao'));
 			$stmt->execute();
 		}
 

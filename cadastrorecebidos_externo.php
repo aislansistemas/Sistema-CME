@@ -330,6 +330,7 @@
                     $('#material-nome').val('');
                     $('#material-qtd').val('');
                     document.getElementById("add-button").disabled = false;
+                    window.location.reload();
 
                 }
 

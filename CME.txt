@@ -21,7 +21,7 @@ create table tb_usuarios(
 	nome varchar(50) not null,
 	email varchar(40) not null,
 	perfil varchar(30) default 'comum',
-	situacao varchar(12) default 'ativo',
+	situacao varchar(12) default 'inativo',
 	senha varchar(30) not null
 );
 

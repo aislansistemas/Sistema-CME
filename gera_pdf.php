@@ -281,7 +281,7 @@ $mpdf->Output();
         
     foreach($lista as $key => $dado){ 
         $html.="<tr><td>".$dado['id_kit']."</td>";
-        $html.="<td>".$dado['descricao']."</td>";
+        $html.="<td>".$dado['material']."</td>";
         $html.="<td>".$dado['quantidade']."</td>";
         $html.="<td>".$dado['quem_entregou']."</td>";
         $html.="<td>".$dado['quem_recebeu']."</td>";
