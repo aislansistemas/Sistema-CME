@@ -182,7 +182,7 @@
               <div class="input-group">
                 <input class="form-control" type="number" name="quantidade" placeholder="Quantidade" id="material-qtd">
              <div class="input-group-prepend">
-                <button class="btn btn-primary input-sumit" id="add-button">Adicionar</button>
+                <button onclick="(function(){window.location.reload();})()" class="btn btn-primary input-sumit" id="add-button">Adicionar</button>
               </div>
             </div> 
             </div>
