@@ -34,6 +34,11 @@ if(isset($_GET['proce_externo'])){
 	$kit_extn_proce->__set('id_hospital',$_SESSION['id_hospital']);
 	$kit_extn_service = new Kit_proce_externo_service($kit_extn_proce,$conexao);
 	$lista=$kit_extn_service->listaKitProcessandoExterno($pagina,$limit);
+
+    $sum = 0;
+    foreach ($lista as $key => $value){
+        $sum += $value['quantidade'];
+    }
 	
 
 $html = "
@@ -71,8 +76,16 @@ $html = "
 <p>
 	<img width='150' src='img/logo.png'>
 	<h1>Materiais Processados Externos</h1>
-    <div style='margin-left:0px;margin-bottom:10px'>
+    <div>
         <small>Data: ".$DtSaida=date('d/m/Y')."</small>
+    </div>
+
+    <div style='margin-left:0px;margin-bottom:2px'>
+    <small>Total de registros: ".count($lista)."</small>
+    </div>
+
+    <div style='margin-left:0px;margin-bottom:10px'>
+    <small>Total de Materiais: ".$sum."</small>
     </div>
 </p>
 <table align='center'>
@@ -85,6 +98,7 @@ $html = "
             <th scope='col'>Início do ciclo</th>
             <th scope='col'>Fim do ciclo</th>
             <th scope='col'>Nº Ciclo</th>
+            <th scope='col'>Quantidade</th>
             <th scope='col'>Pressão</th>
             <th scope='col'>Temp.Interna</th>
             <th scope='col'>Horario que atingiu 134º</th>
@@ -107,6 +121,7 @@ $html = "
         $html.="<td>".$dado['inicio_ciclo']."</td>";
         $html.="<td>".$dado['fim_ciclo']."</td>";
         $html.="<td>".$dado['numero_do_ciclo']."</td>";
+        $html.="<td>".$dado['quantidade']."</td>";
         $html.="<td>".$dado['pressao']."</td>";
         $html.="<td>".$dado['temperatura_interna']."</td>";
         $html.="<td>".$dado['horario_134']."</td>";
@@ -170,9 +185,15 @@ $mpdf->Output();
     <h1>Materiais Recebidos Internos</h1>
    
 </p>
-<div style='margin-left:55px;margin-bottom:10px'>
+
+<div style='margin-left:55px;margin-bottom:5px'>
  <small>Data: ".$DtSaida=date('d/m/Y')."</small>
 </div>
+
+<div style='margin-left:55px;margin-bottom:10px'>
+    <small>Total de registros: ".count($lista)."</small>
+</div>
+
 <table align='center'>
     <thead>
         <tr>
@@ -220,6 +241,11 @@ $mpdf->Output();
     $kit_externo_service = new Kit_mat_extern_service($kit_externo,$conexao);
     $lista = $kit_externo_service->listaMateriaisExternos($pagina,$limit);
 
+    $sum = 0;
+    foreach ($lista as $key => $value){
+        $sum += $value['quantidade'];
+    }
+
     $html = "
 <style>
     h1{
@@ -256,9 +282,18 @@ $mpdf->Output();
     <h1>Materiais Recebidos Externos</h1>
    
 </p>
-<div style='margin-left:7px;margin-bottom:10px'>
+<div style='margin-left:7px;margin-bottom:2px'>
  <small>Data: ".$DtSaida=date('d/m/Y')."</small>
 </div>
+
+<div style='margin-left:7px;margin-bottom:2px'>
+    <small>Total de registros: ".count($lista)."</small>
+</div>
+
+<div style='margin-left:7px;margin-bottom:10px'>
+    <small>Total de Materiais: ".$sum."</small>
+</div>
+
 <table align='center'>
     <thead>
         <tr>
@@ -346,9 +381,13 @@ $mpdf->Output();
     <h1>Materiais internos liberados do Sistema</h1>
    
 </p>
-<div style='margin-left:27px;margin-bottom:10px'>
+<div style='margin-left:27px;margin-bottom:2px'>
  <small>Data: ".$DtSaida=date('d/m/Y')."</small>
 </div>
+<div style='margin-left:27px;margin-bottom:10px'>
+    <small>Total de registros: ".count($lista)."</small>
+</div>
+
 <table align='center'>
     <thead>
         <tr>
@@ -398,6 +437,11 @@ $mpdf->Output();
     $kit_interno_service = new Kit_saido_externo_service($kit_interno,$conexao);
     $lista=$kit_interno_service->listaKitSaidaExterno($pagina,$limit);
 
+    $sum = 0;
+    foreach ($lista as $key => $value){
+        $sum += $value['quantidade'];
+    }
+
     $html = "
 <style>
     h1{
@@ -435,8 +479,15 @@ $mpdf->Output();
     <img width='150' src='img/logo.png'>
     <h1>Materiais externos liberados do Sistema</h1>  
 </p>
-<div style='margin-left:0px;margin-bottom:10px'>
+<div style='margin-left:0px;margin-bottom:2px'>
  <small>Data: ".$DtSaida=date('d/m/Y')."</small>
+</div>
+<div style='margin-left:0px;margin-bottom:2px'>
+    <small>Total de registros: ".count($lista)."</small>
+</div>
+
+<div style='margin-left:0px;margin-bottom:10px'>
+    <small>Total de Materiais: ".$sum."</small>
 </div>
 <table align='center'>
     <thead>
@@ -526,9 +577,14 @@ $mpdf->Output();
     <img width='150' src='img/logo.png'>
     <h1>Materiais processados Internos</h1>  
 </p>
-<div style='margin-left:0px;margin-bottom:10px'>
+<div style='margin-left:0px;margin-bottom:2px'>
  <small>Data: ".$DtSaida=date('d/m/Y')."</small>
 </div>
+
+<div style='margin-left:0px;margin-bottom:10px'>
+    <small>Total de registros: ".count($lista)."</small>
+</div>
+
 <table align='center'>
     <thead>
         <tr>
